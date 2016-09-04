@@ -1,0 +1,144 @@
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper" ng-show="vm.loading">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin: auto; padding: 100px 0 0 0; text-align: center; width: 200px; height: 170px; display: block;">
+                    <img src="images/carlive_green.svg" style="border-radius: 100%; width: 150px" />
+                    <div class="element-animation"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper" ng-show="!vm.loading">
+        <!-- page start-->
+
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li> Manutenções</li>
+                    <li class="active">Confirmação de cadastro de manutenção</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Confirmação de cadastro de manutenção
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="alert alert-success fade in">
+                            <button data-dismiss="alert" class="close close-sm" type="button">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <strong>Pronto!</strong> O cadastro da manutenção foi realizado com sucesso.
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-truck"></i></span> Caminhão</h2>
+                                    <div class="location-info">
+                                        <p>
+                                            <strong>{{vm.maintenance.truck.carro_nome}}</strong> <br>
+                                            <strong>Frota:</strong> {{vm.maintenance.truck.carro_frota}} <br>
+                                            <strong>Placa:</strong> {{vm.maintenance.truck.carro_placa}} <br>
+                                            <strong>Placa semi-reboque:</strong> {{vm.maintenance.truck.carro_placa_semi_reboque}} <br>
+                                        </p>
+                                    </div>
+                                    <h2> <span><i class="fa fa-road"></i></span> Quilometragem (Km)</h2>
+                                    <div class="location-info">
+                                        <p><strong>Atual:</strong> {{vm.maintenance.truck.carro_km | number}} <br>
+                                            <strong>Manutenção:</strong> {{vm.maintenance.km | number}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-calendar"></i></span> Data</h2>
+                                    <div class="location-info">
+                                        <p><strong>Cadastro:</strong> {{vm.maintenance.date_add}} <br>
+                                            <strong>Manutenção:</strong><span ng-show="!vm.maintenance.date"> - </span> {{vm.maintenance.date}}
+                                        </p>
+                                    </div>
+                                    <h2> <span><i class="fa fa-money"></i></span> Preço</h2>
+                                    <div class="location-info">
+                                        <p><strong>Peças:</strong> {{vm.maintenance.sumPricePart | currency}} <br>
+                                            <strong>Manutenção:</strong> <span ng-show="!vm.maintenance.price"> - </span>{{vm.maintenance.price | currency}}
+                                        </p>
+                                        <p>
+                                            Status:
+                                            <span ng-show="vm.maintenance.status == 2" class="label label-success label-mini">Realizada</span>
+                                            <span ng-show="vm.maintenance.status == 1" class="label label-danger label-mini">Pendente</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-battery-half"></i></span> Peças/Itens</h2>
+                                    <div class="location-info">
+                                        <table class="table table-bordered table-striped table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th>Peça/Item</th>
+                                                <th>Tipo</th>
+                                                <th class="text-center">Quantidade</th>
+                                                <th class="text-center">Preço Total</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="part in vm.maintenance.parts track by $index">
+                                                <td>{{part.name_part}}</td>
+                                                <td><span ng-show="!part.desc_stock"> - </span>{{part.desc_stock}}</td>
+                                                <td class="text-center">{{part.qtd}}</td>
+                                                <td class="text-center">{{part.price | currency}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: right"><strong>Total</strong></td>
+                                                <td class="text-center"><strong>{{vm.maintenance.sumPricePart | currency}}</strong></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space15" ng-show="vm.maintenance.comments"></div>
+                        <div class="row" ng-show="vm.maintenance.comments">
+                            <div class="col-md-11">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-comments"></i></span> Observações</h2>
+                                    <div class="location-info">
+                                        <p>{{vm.maintenance.comments}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-11 text-center">
+                                <button type="button" class="btn btn-default "><i class="fa fa-pencil"></i> Editar</button>
+                                <button type="button" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->

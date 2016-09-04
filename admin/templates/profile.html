@@ -1,0 +1,47 @@
+<!--main content start-->
+<div id="main-content">
+
+    <div class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-bar-chart"></i> Dashboard</a></li>
+                    <li class="active">Perfil</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Perfil
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body profile-information">
+                        <div class="col-md-3">
+                            <div class="profile-pic text-center">
+                                <i class="fa fa-user fa-10x"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>{{vm.user.email}}</h4>
+                            <span class="text-muted">{{vm.user.perfil}}</span>
+                            <br>
+                            <br>
+                            <button type="button" class="btn btn-primary" ng-click="vm.changePassword()"><i class="fa fa-key"></i> Trocar senha</button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->

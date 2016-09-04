@@ -1,0 +1,102 @@
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <!-- page start-->
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <div class="panel-body">
+                        <table class="table table-striped" width="100%" ng-show="!vm.loading && vm.results.length">
+                            <thead>
+                            <tr>
+                                <th>Pedido #</th>
+                                <th>Apartamento</th>
+                                <th>Entrega</th>
+                                <th>Produtos</th>
+                                <th>Agendado</th>
+                                <th class="center">Ações</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="order in vm.results">
+                                <td><a href data-target="#myModalId" data-toggle="modal" ng-click="vm.getStatus(order.order_id)">{{order.numero_pedido}}</a></td>
+                                <td>{{order.apartamento}}</td>
+                                <td><span ng-show="!order.local"> {{order.apartamento}} </span>{{order.local}}</td>
+                                <td>
+                                    <div ng-repeat="produto in order.produtos">
+                                        <a href data-target="#myModal" data-toggle="modal" ng-click="vm.getImage(produto.image, produto.name)">
+                                            <h5>{{ produto.name }}: {{ produto.qtd }} unid.(s)</h5>
+                                        </a>
+                                        <ul style="font-size: 12px; padding-left: 20px;">
+                                            <li ng-repeat="type in produto.type">
+                                                <span ng-show="type.name">{{type.name}}<br /></span>
+                                                <span ng-show="type.comment">obs.: {{type.comment}}</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span ng-show="order.schedule == 0"> - </span>
+                                    <span ng-show="order.schedule == 1">{{order.time}}</span>
+                                </td>
+                                <td class="center">
+                                    <button class="btn btn-warning" ng-click="vm.ready(order.order_id)"><i class="fa fa-thumbs-o-up"></i>&nbsp; Pronto</button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <div class="col-sm-12 center" ng-show="vm.loading">
+                            <img src="images/loading.gif">
+                        </div>
+                        <div class="alert alert-danger" ng-show="!vm.loading && !vm.results.length">
+                            <strong>{{vm.message}}</strong>
+                        </div>
+                        <toast></toast>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section>
+<!--main content end-->
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-header center">
+            {{vm.name}}
+            <button class="close" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-content">
+            <div class="modal-body">
+                <img ng-src="{{vm.getImageUrl()}}" class="img-responsive">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModalId" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-header center">
+            Opção
+            <button class="close" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-content">
+            <div class="modal-body">
+                <p class="">
+                    Informa o status do pedido que deseja alterar
+                </p>
+                <select class="form-control" name="opcao" ng-model="opcao">
+                    <option value="1">Realizado</option>
+                    <option value="5">Pronto</option>
+                    <option value="4">Saiu para entrega</option>
+                    <option value="2">Entregue</option>
+                    <option value="6">Cancelado</option>
+                </select>
+                <br />
+                <button class="btn btn-default" ng-click="vm.changeStatus(vm.order_id, opcao)">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>

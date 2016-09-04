@@ -1,0 +1,138 @@
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper" ng-show="vm.loading">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="margin: auto; padding: 100px 0 0 0; text-align: center; width: 200px; height: 170px; display: block;">
+                    <img src="images/carlive_green.svg" style="border-radius: 100%; width: 150px" />
+                    <div class="element-animation"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrapper" ng-show="!vm.loading">
+        <!-- page start-->
+
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li class="active">Manutenção</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Manutenção
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-truck"></i></span> Caminhão</h2>
+                                    <div class="location-info">
+                                        <p>
+                                            <strong>{{vm.maintenance.carro_nome}}</strong> <br>
+                                            <strong>Frota:</strong> {{vm.maintenance.carro_frota}} <br>
+                                            <strong>Placa:</strong> {{vm.maintenance.carro_placa}} <br>
+                                            <strong>Placa semi-reboque:</strong> {{vm.maintenance.carro_placa_semi_reboque}} <br>
+                                        </p>
+                                    </div>
+                                    <h2> <span><i class="fa fa-road"></i></span> Quilometragem (Km)</h2>
+                                    <div class="location-info">
+                                        <p><strong>Atual:</strong> {{vm.maintenance.carro_km | number}} <br>
+                                            <strong>Manutenção:</strong> {{vm.maintenance.revisao_km | number}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-calendar"></i></span> Data</h2>
+                                    <div class="location-info">
+                                        <p><strong>Cadastro:</strong> <span ng-show="!vm.maintenance.revisao_data_ativacao"> - </span>{{vm.maintenance.revisao_data_ativacao}} <br>
+                                            <strong>Manutenção:</strong> <span ng-show="!vm.maintenance.revisao_data"> - </span>{{vm.maintenance.revisao_data}}
+                                        </p>
+                                    </div>
+                                    <h2> <span><i class="fa fa-money"></i></span> Preço</h2>
+                                    <div class="location-info">
+                                        <p><strong>Peças:</strong> <span ng-show="!vm.maintenance.total_parts"> - </span>{{vm.maintenance.total_parts | currency}} <br>
+                                            <strong>Manutenção:</strong> <span ng-show="!vm.maintenance.revisao_valor"> - </span>{{vm.maintenance.revisao_valor | currency}}
+                                        </p>
+                                        <p>
+                                            Status:
+                                            <span ng-show="vm.maintenance.revisao_status == 2" class="label label-success label-mini">Realizada</span>
+                                            <span ng-show="vm.maintenance.revisao_status == 1" class="label label-danger label-mini">Pendente</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa fa-wrench"></i></span> Peça/Item</h2>
+                                    <div class="location-info">
+                                        <table class="table table-bordered table-striped table-condensed">
+                                            <thead>
+                                            <tr>
+                                                <th>Peça/Item</th>
+                                                <th>Tipo</th>
+                                                <th class="text-center">Quantidade</th>
+                                                <th class="text-center">Preço Unitário</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <tr ng-repeat="part in vm.maintenance.parts track by $index">
+                                                <td>{{part.item_nome}}</td>
+                                                <td>{{part.estoque_descricao}}</td>
+                                                <td class="text-center">{{part.revisao_item_qtd}}</td>
+                                                <td class="text-center">{{part.revisao_item_valor | currency}}</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="text-align: right"><strong>Total</strong></td>
+                                                <td class="text-center"><strong>{{vm.maintenance.total_parts | currency}}</strong></td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="space15" ng-show="vm.maintenance.revisao_observacao"></div>
+                        <div class="row" ng-show="vm.maintenance.revisao_observacao">
+                            <div class="col-md-11">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-comments"></i></span> Observações</h2>
+                                    <div class="location-info">
+                                        <p>{{vm.maintenance.revisao_observacao}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-11 text-center">
+                                <button type="button" class="btn btn-default" ng-click="vm.back()"><i class="fa fa-undo"></i> Voltar</button>
+                                <button type="button" class="btn btn-default" ng-click="vm.editMaintenance(vm.maintenance)"><i class="fa fa-pencil"></i> Editar</button>
+                            </div>
+                        </div>
+                    </div>
+                    <span id="toastrOptions"></span>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->

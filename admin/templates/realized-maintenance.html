@@ -1,0 +1,76 @@
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li> Manutenções</li>
+                    <li class="active">Manutenções realizadas</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Manutenções realizadas
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body" ng-show="vm.maintenances.length">
+                        <div class="adv-table editable-table ">
+                            <table class="display table table-hover table-bordered table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Caminhão</th>
+                                    <th class="text-center">Peça/Item</th>
+                                    <th class="text-center">Km</th>
+                                    <th class="text-center">Data</th>
+                                    <th class="text-center">Ação</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="maintenance in vm.maintenances">
+                                    <td>
+                                        <ul>
+                                            <li>{{maintenance.carro_nome}}</li>
+                                            <li>Placa: {{maintenance.carro_placa}}</li>
+                                            <li>Placa semi-reboque: {{maintenance.carro_placa_semi_reboque}}</li>
+                                        </ul>
+                                    </td>
+                                    <td class="center">
+                                        <ul style="padding-left: 0px;">
+                                            <li ng-repeat="part in maintenance.parts">{{part.item_nome}}</li>
+                                        </ul>
+                                    </td>
+                                    <td class="center">{{maintenance.revisao_km | number}}</td>
+                                    <td class="center">{{maintenance.revisao_data}}</td>
+                                    <td class="center">
+                                        <div class="todo-actionlist">
+                                            <a href ng-click="vm.getMaintenance(maintenance)" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                            <a href ng-click="vm.editMaintenance(maintenance)" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div ng-show="!vm.maintenances.length">
+                        <p>Não existem manutenções realizadas.</p>
+                    </div>
+                    <span id="toastrOptions"></span>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->

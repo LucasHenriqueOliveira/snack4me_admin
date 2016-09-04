@@ -1,0 +1,80 @@
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li> Viagens</li>
+                    <li class="active">Últimas viagens</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Últimas viagens
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="adv-table editable-table ">
+                            <table class="display table table-hover table-bordered table-striped table-condensed" ng-show="vm.lastTrip.length">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Caminhão</th>
+                                    <th class="text-center">Motorista</th>
+                                    <th class="text-center">Cidade</th>
+                                    <th class="text-center">Data</th>
+                                    <th class="text-center">Ação</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="trip in vm.lastTrip">
+                                    <td>
+                                        <ul>
+                                            <li>{{trip.carro_nome}}</li>
+                                            <li>Frota: {{trip.carro_frota}}</li>
+                                            <li>Placa: {{trip.carro_placa}}</li>
+                                            <li>Placa semi-reboque: {{trip.carro_placa_semi_reboque}}</li>
+                                        </ul>
+                                    </td>
+                                    <td class="center">{{trip.usuario_nome}}</td>
+                                    <td>
+                                        <ul>
+                                            <li>Origem: {{trip.cidade_origem}}</li>
+                                            <li>Destino: {{trip.cidade_destino}}</li>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <ul>
+                                            <li>Saída: {{trip.data_saida}}</li>
+                                            <li>Chegada: {{trip.data_chegada}}</li>
+                                        </ul>
+                                    </td>
+                                    <td class="center">
+                                        <div class="todo-actionlist">
+                                            <a href="#/trip/{{trip.viagem_id}}" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                            <a href="#/edit-trip/{{trip.viagem_id}}" class="todo-done icon-center" title="Editar"><i class="ico-pencil"></i></a>
+                                        </div>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            <p ng-show="!vm.lastTrip.length">Não existe viagem cadastrada nos últimos 15 dias.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->

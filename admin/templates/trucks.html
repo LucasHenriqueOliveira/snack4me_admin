@@ -1,0 +1,82 @@
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-bar-chart"></i> Dashboard</a></li>
+                    <li class="active">Produtos</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Produtos
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body" ng-show="vm.produtos.length">
+                        <div class="adv-table editable-table ">
+                            <div class="clearfix">
+                                <div class="btn-group">
+                                    <a href="#/add-product" class="btn btn-primary">
+                                        <i class="fa fa-plus"></i> Novo
+                                    </a>
+                                </div>
+                                <div class="btn-group pull-right">
+                                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-cog"></i>
+                                    </button>
+                                    <ul class="dropdown-menu pull-right">
+                                        <li><a href="#"><i class="fa fa-print"></i> Imprimir</a></li>
+                                        <li><a href="#"><i class="fa fa-file-pdf-o"></i> Salvar como PDF</a></li>
+                                        <li><a href="#"><i class="fa fa-file-excel-o"></i> Exportar para Excel</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="space15"></div>
+                            <table class="display table table-hover table-bordered table-striped table-condensed">
+                                <thead>
+                                <tr>
+                                    <th class="text-center">Número</th>
+                                    <th class="text-center">Produto</th>
+                                    <th class="text-center">Preço</th>
+                                    <th class="text-center">Hora Início</th>
+                                    <th class="text-center">Hora Fim</th>
+                                    <th class="text-center">Ação</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="produto in vm.produtos">
+                                    <td class="center">{{produto.product_number}}</td>
+                                    <td>{{produto.product_name_pt}}</td>
+                                    <td class="center">{{produto.product_price | currency}}</td>
+                                    <td class="center">{{produto.product_hour_initial.substring(0, 5)}}</td>
+                                    <td class="center">{{produto.product_hour_final.substring(0, 5)}}</td>
+                                    <td class="todo-actionlist center">
+                                        <a href ng-click="vm.getProduct(produto)" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
+                                        <!--<a href ng-click="vm.editProduct(produto)" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>-->
+                                        <a href ng-click="vm.removeProduct(produto)" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div ng-show="!vm.produtos.length">
+                            <p>Não existem produtos ativos.</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->

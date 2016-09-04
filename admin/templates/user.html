@@ -1,0 +1,79 @@
+<!--main content start-->
+<div id="main-content">
+
+    <div class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li class="active">Usuário</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Usuário
+                            <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-user"></i></span> Dados</h2>
+                                    <div class="location-info">
+                                        <p><strong>Função:</strong> {{vm.user.tipo_perfil_nome}} <br>
+                                            <strong>Nome:</strong> {{vm.user.usuario_nome}} <br>
+                                            <strong>E-mail:</strong> <span ng-show="!vm.user.usuario_email"> - </span>{{vm.user.usuario_email}}<br>
+                                            <strong>CNH:</strong> <span ng-show="!vm.user.usuario_cnh"> - </span>{{vm.user.usuario_cnh}}
+                                        </p>
+                                    </div>
+                                    <h2> <span><i class="fa fa-user-md"></i></span> Exame Periódico</h2>
+                                    <div class="location-info">
+                                        <p>
+                                            <strong>Vencimento:</strong> <span ng-show="!vm.user.usuario_data_exame"> - </span>{{vm.user.usuario_data_exame}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="prf-contacts">
+                                    <h2> <span><i class="fa fa-calendar"></i></span> Data</h2>
+                                    <div class="location-info">
+                                        <p><strong>Ativação:</strong> <span ng-show="!vm.user.perfil_data_ativacao"> - </span>{{vm.user.perfil_data_ativacao}} <br>
+                                            <strong>Desativação:</strong> <span ng-show="!vm.user.perfil_data_desativacao"> - </span> {{vm.user.perfil_data_desativacao}}
+                                        </p>
+                                    </div>
+                                    <h2> <span><i class="fa fa-phone"></i></span> Contato</h2>
+                                    <div class="location-info">
+                                        <p><strong>Telefone:</strong> <span ng-show="!vm.user.usuario_telefone1"> - </span>{{vm.user.usuario_telefone1 | tel}} <br>
+                                            <strong>Telefone:</strong> <span ng-show="!vm.user.usuario_telefone2"> - </span>{{vm.user.usuario_telefone2 | tel}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-11 text-center">
+                                <button type="button" class="btn btn-default " ng-click="vm.back()"><i class="fa fa-undo"></i> Voltar</button>
+                                <button type="button" class="btn btn-default "><i class="fa fa-pencil"></i> Editar</button>
+                                <button type="button" class="btn btn-primary"><i class="fa fa-print"></i> Imprimir</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+<!--main content end-->

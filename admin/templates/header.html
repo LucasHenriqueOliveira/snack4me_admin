@@ -1,0 +1,39 @@
+<!--header start-->
+<header class="header fixed-top clearfix">
+    <!--logo start-->
+    <div class="brand">
+
+        <a href="#/" class="logo">
+            <img src="images/logo.svg" width="130px" alt="">
+        </a>
+    </div>
+    <!--logo end-->
+
+    <div class="top-nav clearfix">
+        <!--search & user info start-->
+        <ul class="nav pull-right top-menu">
+            <li>
+                <input type="text" class="form-control search" placeholder=" Pesquisar">
+            </li>
+            <!-- user login dropdown start-->
+            <li class="dropdown">
+                <a data-toggle="dropdown" class="dropdown-toggle icon-user" href="javascript:;">
+                    <i class="fa fa-user"></i>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu extended logout">
+                    <li><a href="#/profile"><i class=" fa fa-suitcase"></i>Perfil</a></li>
+                    <li><a href="" ng-click="logout()"><i class="fa fa-key"></i> Sair</a></li>
+                </ul>
+            </li>
+            <!-- user login dropdown end -->
+            <li>
+                <div class="sidebar-toggle-box">
+                    <div class="fa fa-exchange"></div>
+                </div>
+            </li>
+        </ul>
+        <!--search & user info end-->
+    </div>
+</header>
+<!--header end-->

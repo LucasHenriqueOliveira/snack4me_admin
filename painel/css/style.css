@@ -1,0 +1,44 @@
+body {
+    padding-top: 50px;
+}
+
+.logo {
+    width: 100px;
+}
+
+.navbar-brand {
+    padding: 0 !important;
+    padding-right: 30px !important;
+    padding-top: 3px !important;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    background-color: #363843;
+    font-weight: bold;
+    color: #fff;
+}
+
+.center {
+    text-align: center;
+}
+
+.total {
+    margin-top: 15px;
+    margin-left: 15px;
+    font-weight: bold;
+}
+
+.modal-dialog {
+    width: 70%;
+}
+
+.fast{
+    background-color: rgba(213, 222, 59, 0.3) !important;
+}
+
+.topo {
+    padding-right: 2px !important;
+    padding-left: 2px !important;
+    margin-right: 10px !important;
+    margin-left: 10px !important;
+}

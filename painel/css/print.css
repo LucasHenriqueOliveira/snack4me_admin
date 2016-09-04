@@ -1,0 +1,66 @@
+@media print {
+    * {
+        background:transparent !important;
+        color:#000 !important;
+        text-shadow:none !important;
+        filter:none !important;
+        -ms-filter:none !important;
+    }
+
+    body {
+        margin:0 !important;
+        padding:0 !important;
+    }
+
+    body, h5, ul li span{
+        font-size: 10px !important;
+    }
+
+    ul {
+        font-size: 10px !important;
+    }
+
+    @page {
+        margin: 0.5cm;
+    }
+
+    nav, footer, video, audio, object, embed, button, select, thead, tr, label, .btn{
+        display:none;
+    }
+
+    .table > tbody > tr > td {
+        border: none !important;
+        padding: 2px !important;
+        margin: 0 !important;
+        line-height: 10px !important;
+    }
+
+    td {
+        display: block; !important;
+        border: none;
+    }
+
+    ul li {
+        padding: 1px;
+    }
+
+    ul {
+        margin-bottom: 2px;
+    }
+
+    td span {
+        display: inline !important;
+    }
+
+    h5 {
+        margin: 1px;
+    }
+
+    .imprimir{
+        display: block; !important;
+    }
+
+    .no_print{
+        display:none !important;
+    }
+}
