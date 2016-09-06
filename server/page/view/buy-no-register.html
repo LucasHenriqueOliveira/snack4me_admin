@@ -1,0 +1,37 @@
+<section id="main" class="container">
+	<div class="row">
+		<div class="12u box">
+			<form ng-submit="buyAnonymous()">
+				<div class="row uniform box-padding-top">
+					<div class="12u">
+						<h3>Comprar sem cadastro no site</h3>
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="12u">
+						<h5>Instruções específicas para finalização de entrega do pedido serão enviadas para seu email</h5>
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="12u">
+						<input type="email" ng-model="email_anonymous" placeholder="Informe o seu e-mail">
+					</div>
+				</div>
+				<div class="row uniform" ng-show="message_email_anonymous">
+					<div class="12u input-group">
+						<div ng-class="messageAlert">{{message_email_anonymous}}</div>
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="3u">
+						<input type="submit" class="button azul_escuro" value="Enviar" style="width:100%">
+						<img src="images/loading_pequeno.gif" ng-if="dataLoading" />
+					</div>
+					<div class="3u">
+						<input type="button" ng-click="go('/login')" class="button azul_escuro" value="Voltar" style="width:100%">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

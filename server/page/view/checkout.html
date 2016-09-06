@@ -1,0 +1,179 @@
+<section id="main" class="container" ng-controller="CheckoutCtrl">
+	<form ng-submit="myOrder()">
+		<div class="row" ng-hide="message_checkout">
+			<div class="8u">
+				<div class="row uniform box-padding-top">
+					<div class="12u">
+						<h3 style="text-transform: uppercase;">Pedido</h3>
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="4u">
+						<div class="row uniform">
+							<div class="12u">
+								<h4>{{name}} ({{event_date}})</h4>
+							</div>
+						</div>
+						<div class="row uniform" ng-show="floor">
+							<div class="12u">
+								Nível: {{floor}}
+							</div>
+						</div>
+						<div class="row uniform" ng-show="sector">
+							<div class="12u">
+								Setor: {{sector}}
+							</div>
+						</div>
+						<div class="row uniform">
+							<div class="12u">
+								Cadeira: {{seat}}
+							</div>
+						</div>
+					</div>
+					<div class="8u">
+						<h4>Produtos</h4>
+						<ul>
+							<li ng-repeat="product in products"> {{product.name}}: {{product.quantity}} unid(s) = R$ {{product.subtotal_unit}}</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="12u">
+						<h3>Pagamento</h3>
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="3u">
+						<select ng-model="type_card" autocomplete="off">
+	                		<option value="">Cartão</option>
+                        	<option value="VI">Visa</option>
+                            <option value="MC">MasterCard</option>
+                            <option value="MC">American Express</option>
+	                    </select>
+					</div>
+					<div class="4u">
+						<input type="text" ng-model="number_card" value="" placeholder="Número do Cartão" autocomplete="off">
+					</div>
+					<div class="4u">
+						<input type="text" ng-model="security_number" value="" placeholder="Código de segurança" autocomplete="off">
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="12u">
+						<label>Data de expiração</label>
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="3u">
+						<select ng-model="month_expiration" autocomplete="off">
+	                    	<option value="" selected="selected">Mês</option>
+                            <option value="1">01 - Janeiro</option>
+                            <option value="2">02 - Fevereiro</option>
+                            <option value="3">03 - Março</option>
+                            <option value="4">04 - Abril</option>
+                            <option value="5">05 - Maio</option>
+                            <option value="6">06 - Junho</option>
+                            <option value="7">07 - Julho</option>
+                            <option value="8">08 - Agosto</option>
+                            <option value="9">09 - Setembro</option>
+                            <option value="10">10 - Outubro</option>
+                            <option value="11">11 - Novembro</option>
+                            <option value="12">12 - Dezembro</option>
+	                   	</select>
+					</div>
+					<div class="4u">
+						<select ng-model="year_expiration" autocomplete="off">
+                            <option value="" selected="selected">Ano</option>
+                            <option value="2014">2014</option>
+                            <option value="2015">2015</option>
+                            <option value="2016">2016</option>
+                            <option value="2017">2017</option>
+                            <option value="2018">2018</option>
+                            <option value="2019">2019</option>
+                            <option value="2020">2020</option>
+                            <option value="2021">2021</option>
+                            <option value="2022">2022</option>
+                            <option value="2023">2023</option>
+                            <option value="2024">2024</option>
+	                    </select>
+					</div>
+				</div>
+			</div>
+			<br />
+			<div class="4u box">
+				<div class="row uniform box-padding-top">
+					<div class="12u">
+						<h3 style="text-transform: uppercase;">Compras</h3>
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="12u">
+						<ul class="totals" style="padding-top:0px">
+							<li>
+						  		<strong>Subtotal:</strong> R$ {{subtotal}}
+						  	</li>
+						  	<li>
+						    	<strong>Desconto:</strong> R$ {{discount}}
+						    </li>
+						    <li ng-show="coupon_tax">
+						    	<strong>Coupon:</strong> {{coupon_number}} ({{coupon_tax}}%)
+						    </li>
+						    <li>
+						    	<strong>Taxa de Serviço:</strong> R$ {{tax_service}}
+						    </li>
+						    <li>
+						    	<strong>Gorjeta:</strong> R$ {{tip}}
+						    </li>
+							<li>
+						  		<strong>Total:</strong> R$ {{total}}
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row uniform box-padding-top">
+					<div class="12u">
+						<h3 style="text-transform: uppercase;">Recebimento</h3>
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="12u">
+						<ul class="totals" style="padding-top:0px">
+							<li ng-show="event_today && date_now">
+						  		Quando deseja receber o pedido?<br />
+						  		<input type="radio" ng-model="schedule" id="now" value="0" ng-click="hideSchedule('true')"> <label for="now">Agora</label>
+								<input type="radio" ng-model="schedule" id="schedule" value="1" ng-click="hideSchedule('false')"> <label for="schedule">Agendar</label>
+							</li>
+							<li ng-hide="event_today">
+								O horário disponível para agendamento é de {{initial_time}} às {{final_time}}. Informe o horário que deseja:
+							</li>
+							<li ng-hide="event_today">
+								<input type="time" ng-model="bdaytime">
+							</li>
+						</ul>
+					</div>
+				</div>
+				<div class="row uniform" ng-show="messageBuy">
+					<div class="12u">
+						<div class="msg-alert alert-danger">{{messageBuy}}</div>
+					</div>
+				</div>
+				<div class="row uniform" ng-show="dataLoading">
+					<div class="12u align-center">
+						<img src="images/loading_pequeno.gif" ng-if="dataLoading" />
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="12u align-center">
+						<input type="submit" class="button verde" style="width: 100%;" value="Finalizar" /><br />
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row uniform" ng-show="message_checkout">
+			<div class="12u input-group">
+				<div class="msg-alert alert-danger">{{message_checkout}}</div>
+				<div><input type="button" ng-click="go('/event')" class="button azul_escuro" value="Faça o pedido novamente" style="width:100%"></div>
+			</div>
+		</div>
+	</form>
+</section>

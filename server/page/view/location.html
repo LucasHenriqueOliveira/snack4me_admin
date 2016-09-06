@@ -1,0 +1,45 @@
+<section id="location">
+	<div id="main" class="container">
+		<div class="row">
+			<div class="12u">
+				<div class="box location">
+					<form name="userLocation" ng-submit="submitLocation()">
+						<h4>{{params.name}} - {{params.date | dateBr}}</h4>
+						
+						<div class="space_fields">
+							<select ng-model="floor" ng-show="isfloor" ng-options="floor.name_floor for floor in floors track by floor.id_floor" ng-change="getSector()" id="floor">
+								<option value="">{{defaultFloor}}</option>
+							</select>
+						</div>
+						<div class="space_fields">
+							<select ng-model="sector" ng-show="isSector" ng-options="sector.name_sector for sector in sectors track by sector.id_sector" ng-change="getRow()">
+								<option value="">{{defaultSector}}</option>
+							</select>
+						</div>
+						<div class="space_fields">
+							<select ng-model="row" ng-show="isRow" ng-options="row.name_row for row in rows track by row.name_row" ng-change="getSeat()">
+								<option value="">{{defaultRow}}</option>
+							</select>
+						</div>
+						<div style="margin-top: 10px; margin-bottom:10px; width: 100%; text-align:center;">
+							<img src="images/seat.png">&nbsp;&nbsp;
+						</div>
+						<div class="space_fields">
+							<select ng-model="seat" ng-options="seat.name_seat for seat in seats track by seat.name_seat">
+								<option value="">{{defaultSeat}}</option>
+							</select>
+						</div>
+						<div class="row uniform box-padding-top">
+							<div class="6u">
+								<input type="submit" name="save" id="save" value="Seguir" class="button azul_escuro" style="width:100%">
+							</div>
+							<div class="6u">
+								<input type="reset" name="limpar" id="limpar" value="Limpar" class="button azul_escuro" style="width:100%">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

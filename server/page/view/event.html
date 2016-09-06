@@ -1,0 +1,66 @@
+<section id="events" ng-show="eventos.length">
+	<div id="main" class="container">
+		<div class="row">
+			<div class="4u align-center" ng-repeat="evento in eventos | slice:0:3">
+				<a ng-click="go('/location/' + evento.id + '/' + evento.name + '/' + evento.date)">
+					<h5 class="event_title">{{evento.name}} - {{evento.date}}</h5>
+					<p class="event_list distance_event">≅ {{evento.distance}} Km</p>
+					<img ng-src="images/events/{{evento.image}}" />	
+					<p class="event_list">{{evento.description}}</p>
+				</a>
+			</div>
+		</div>
+		<br />
+		<div class="row">
+			<div class="4u align-center" ng-repeat="evento in eventos | slice:3:6">
+				<a ng-click="go('/location/' + evento.id + '/' + evento.name + '/' + evento.date)">
+					<h5 class="event_title">{{evento.name}} - {{evento.date}}</h5>
+					<p class="event_list distance_event">≅ {{evento.distance}} Km</p>
+					<img ng-src="images/events/{{evento.image}}" />	
+					<p class="event_list">{{evento.description}}</p>
+				</a>
+			</div>
+		</div>
+		<div class="row">
+			<div class="12u align-center" ng-show="loading"><img src="images/radar.gif"></div>
+		</div>
+	</div>
+</section>
+
+<section ng-controller="EventsCtrl" ng-show="loading">
+	<div id="main" class="container">
+		<div class="row">
+			<div class="12u align-center">
+				<h3>Pesquisando eventos mais próximos</h3>
+				<img src="images/radar.gif">
+			</div>
+		</div>
+	</div>
+</section>
+<section id="search-events" ng-controller="EventsCityCtrl">
+	<form ng-submit="submitEventCity()">
+	<div id="main" class="container">
+		<div class="row">
+			<div class="12u">
+				<h3>Nossos Eventos</h3>
+			</div>
+		</div>
+		<div class="row uniform">
+			<div class="5u">
+				<select ng-model="city" id="city" ng-show="cities" ng-options="city.name_city for city in cities track by city.id_city">
+					<option value="">Selecione sua cidade</option>
+				</select>
+			</div>
+			
+			<div class="5u">
+				<select ng-model="event_city" id="event">
+				</select>
+			</div>
+			
+			<div class="2u">
+				<input type="submit" name="selecionar" id="selecionar" value="Selecionar" class="button azul_escuro"  style="width:100%">
+			</div>
+		</div>
+	</div>
+	</form>
+</section>

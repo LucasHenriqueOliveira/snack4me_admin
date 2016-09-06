@@ -1,0 +1,71 @@
+<section id="products">
+	<div id="main" class="container">
+		<form ng-submit="submitProducts()">
+			<div class="row uniform">
+				<div class="8u">
+					<div class="row uniform" ng-show="concessions">
+						<div class="12u">
+							<h4>Clique na concessão</h4>
+							<ul style="list-style:none; padding-left: 0; margin-bottom: 10px;">
+    							<li ng-model="concession" ng-show="concessions" ng-repeat="concession in concessions" style="display: inline;">
+    								<a ng-click="atualizaProducts(concession.id)" style="padding: 2px 10px; display: inline-block; text-decoration: none; line-height: 20px;">
+    									<img ng-src="images/concessions/{{concession.image}}" width="60px" style="vertical-align: middle;">
+    								</a>
+    							</li>
+    						</ul>
+						</div>
+					</div>
+					<div class="row uniform products" ng-repeat="produto in produtos">
+						<div class="4u">
+							<img ng-src="images/products/{{produto.image}}" /> 
+						</div>
+						<div class="5u">
+							<h4>{{produto.name}}</h4>
+							<p>{{produto.desc}}</p>
+						</div>
+						<div class="3u">
+							<span>R${{produto.price}}</span>
+							<span>x</span>
+							<select ng-model="produto.selectedOption" ng-options="qtd for qtd in quantidade" ng-change="setSubtotal()" ng-init="produto.selectedOption=quantidade[0]" style="display: inline;margin:0; width:50px; padding: 0px;">
+							</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="3u box" style="margin-left: 10px !important;">
+					<ul class="totals">
+						<li>
+							<input type="text" name="coupon" id="coupon" ng-model="coupon" placeholder="Possui vale-desconto?">
+							<input type="button" class="button alt small" id="aplicar" ng-click="checkCoupon()" value="Aplicar" />
+						</li>
+						<li>
+							<span ng-bind-html="myCoupon" class="message-small" ng-class="colorMessage"></span>
+						</li>
+						<li class="space_fields">
+					  		<strong>Subtotal:</strong>
+					  		<span ng-bind-html="mySubtotal"></span>
+					  	</li>
+					  	<li class="space_fields">
+					    	<strong>Desconto:</strong>
+					        <span ng-bind-html="myDiscount"></span>
+					    </li>
+					    <li>
+							<span ng-bind-html="myTaxService"></span>
+						</li>
+						<li class="space_fields">
+					  		<strong>Gorjeta:</strong>
+					  		<input type="text" ng-model="tip" id="tip" placeholder="R$ 0.00" ng-model-onblur ng-change="update()">
+						</li>
+						<li class="space_fields">
+					  		<strong>Total:</strong>
+					  		<span ng-bind-html="myTotal"></span>
+						</li>
+						<li class="space_fields">
+					  		<input type="submit" class="button azul_escuro" style="width: 100%;" value="Fazer pagamento" />
+						</li>
+					</ul>
+				</div>
+			</div>
+		</form>
+	</div>
+</section>

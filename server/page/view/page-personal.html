@@ -1,0 +1,72 @@
+<section id="main" class="container">
+	<div class="row">
+		<div class="5u box">
+			<div class="row uniform box-padding-top">
+				<div class="12u">
+					<h3>Minha Conta</h3>
+				</div>
+			</div>
+			<div class="row uniform">
+				<div class="12u">
+					Olá, <strong>{{name}}</strong>!<br />
+					A partir do seu painel, você tem a capacidade de atualizar suas informações de conta, além de visualizar os últimos pedidos.
+				</div>
+			</div>
+			<div class="row uniform">
+				<div class="12u">
+					<h4>Dados cadastrais</h4>
+					{{name}}<br/>
+					{{email}}<br />
+					<a ng-click="go('/edit-data')">Editar dados</a><br />
+					<a ng-click="go('/change-password')">Trocar senha</a>
+				</div>
+			</div>
+			
+			<div class="row uniform">
+				<div class="12u">
+					<input type="button" ng-click="go('/event')" style="width:100%" class="button azul_escuro" value="Faça o seu pedido">
+				</div>
+			</div>
+		</div>
+		
+		<div class="7u">
+			<div class="row uniform">
+				<div class="12u">
+					<h3>Meus pedidos</h3>
+				</div>
+			</div>
+			<div class="row uniform" ng-if="dataLoading">
+				<div class="12u align-center">
+					<img src="images/loading_pequeno.gif" />
+				</div>
+			</div>
+			<div class="row uniform" ng-show="orders">
+				<div class="12u collapse">
+					<ul class="collapse-list">
+						<li ng-repeat="order in orders">
+							<label class="collapse-btn" for="collapse-{{order.number}}">
+								Nº: {{order.num_order}} - {{order.event_name}} ({{order.event_date}}) - {{order.status}}
+							</label>
+							<input class="collapse-open" type="checkbox" id="collapse-{{order.number}}" aria-hidden="true" hidden>
+							<div class="collapse-painel">
+					        	<div class="collapse-inner">
+					        		<p>
+										Data do pedido: {{order.date}} <br />
+										Horário do pedido: {{order.hour}} <br />
+										Preço Total: R$ {{order.price_total}} <br />
+										<a ng-click="go('/order/' + order.id)" style="text-decoration: underline;">Detalhes do seu pedido</a>
+									</p>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="row uniform" ng-show="messageOrders">
+				<div class="12u input-group">
+					<div class="msg-alert alert-warning">{{messageOrders}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,51 @@
+<footer id="footer" ng-controller="FooterCtrl">
+	<div class="container">
+		<div class="row">
+			<section class="6u">
+				<h3><img src="images/icon.jpg" width="60px"></h3>
+				<p>Com o Snack4me ninguém precisa perder nenhum lance. Com ele, é possível fazer um pedido sem sair do lugar, com conveniência e comodidade sem enfrentar filas, e sem perder tempo.</p>
+				<hr>
+				<form ng-submit="signNewsletter()">
+					<div class="newsletter">
+						<div class="row uniform">
+							<div class="12u">
+								Receba ofertas e novidades por email.
+							</div>
+						</div>
+						<div class="row uniform">
+							<div class="8u">
+								<input type="email" ng-model="email" class="newsletter_text" placeholder="Digite seu email">
+							</div>
+							<div class="4u">
+								<input type="submit" class="button azul_claro" value="Cadastrar" style="width:100%">
+							</div>
+						</div>
+					</div>
+				</form>
+			</section>
+			<section class="3u">
+				<h3>Quer ser um parceiro?</h3>
+				<p>Mande um e-mail para
+					partner@snack4me.com
+					e receba mais informações.
+				</p>
+				<ul class="actions social">
+					<li><a href="#"><i class="fa fa-facebook-square fa-2x"></i></a></li>
+					<li><a href="#"><i class="fa fa-google-plus-square fa-2x"></i></a></li>
+					<li><a href="#"><i class="fa fa-twitter-square fa-2x"></i></a></li>
+				</ul>
+			</section>
+			<section class="3u" id="map">
+				<h3>Mapa do Site</h3>
+				<ul class="alt">
+					<li><a href="#index?scrollTo=steps">Como funciona</a></li>
+					<li><a href="#index?scrollTo=partners">Parceiros</a></li>
+					<li><a href="#index?scrollTo=contact">Contato</a></li>
+				</ul>
+			</section>
+		</div>
+	</div>
+	<div class="copyright">
+		&copy; Copyright 2014 by Snack4me. All Rights Reserved.
+	</div>
+</footer>

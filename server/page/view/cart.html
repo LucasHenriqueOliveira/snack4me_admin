@@ -1,0 +1,88 @@
+<section id="main" class="container">
+	<div class="row uniform" ng-hide="message">
+		<div class="4u" ng-show="event_name">
+			<div class="row uniform box-padding-top">
+				<div class="12u">
+					<h3 class="work">1. Onde estou?</h3>
+				</div>
+			</div>
+			<div class="row uniform">
+				<div class="12u">
+					<strong>{{event_name}} ({{event_date}})</strong>
+				</div>
+			</div>
+			<div class="row uniform" ng-show="floor">
+				<div class="12u">
+					Nível: {{floor}}
+				</div>
+			</div>
+			<div class="row uniform" ng-show="sector">
+				<div class="12u">
+					Setor: {{sector}}
+				</div>
+			</div>
+			<div class="row uniform" ng-show="seat">
+				<div class="12u">
+					Cadeira: {{seat}}
+				</div>
+			</div>
+		</div>
+		<div class="5u" ng-show="products">
+			<div class="row uniform box-padding-top">
+				<div class="12u">
+					<h3 class="work">2. O que estou pedindo?</h3>
+				</div>
+			</div>
+			<div class="row uniform">
+				<div class="12u">
+					<ul>
+						<li ng-repeat="product in products"> {{product.name}}: {{product.quantity}} unid(s) = R$ {{product.subtotal_unit}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="3u" ng-show="total">
+			<div class="row uniform box-padding-top">
+				<div class="12u">
+					<h3 class="work">3. Quanto vou pagar?</h3>
+				</div>
+			</div>
+			<div class="row uniform">
+				<div class="12u">
+					<ul class="totals" style="padding-top:0px">
+						<li>
+					  		<strong>Subtotal:</strong> R$ {{subtotal}}
+					  	</li>
+					    <li>
+					    	<strong>Taxa de Serviço:</strong> R$ {{tax_service}}
+					    </li>
+					    <li>
+					    	<strong>Gorjeta:</strong> R$ {{tip}}
+					    </li>
+						<li>
+					  		<strong>Total:</strong> R$ {{total}}
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row uniform" ng-show="dataLoading">
+		<div class="12u align-center">
+			<img src="images/loading_pequeno.gif" ng-if="dataLoading" />
+		</div>
+	</div>
+	<div class="row uniform" ng-show="message">
+		<div class="12u input-group">
+			<div class="msg-alert alert-warning">{{message}}</div>
+		</div>
+	</div>
+	<div class="row uniform">
+		<div class="4u">
+			<button ng-click="go(action_button)" class="button azul_escuro" style="width:100%"> {{button}} </button> &nbsp;
+		</div>
+		<div class="4u">
+			<button ng-click="clearCart()" class="button azul_escuro" ng-show="id_event" style="width:100%"> Esvaziar meu carrinho </button>
+		</div>
+	</div>
+</section>

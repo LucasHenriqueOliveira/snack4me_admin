@@ -1,0 +1,116 @@
+<section>
+	<div id="main" class="container">
+		<div class="row">
+			<div class="5u box" style="margin-left: 10px !important;">
+				<form>
+					<div class="row uniform box-padding-top">
+						<div class="12u">
+							<h3 style="text-transform: uppercase;">Login</h3>
+						</div>
+					</div>
+					<div class="row uniform">
+						<div class="6u">
+							<div id="fb-root"></div>
+							<button ng-click="loginFacebook()" class="button azul fit small icon fa-facebook" name="facebook">Login com facebook</button>
+						</div>
+						<div class="6u">
+							<button google-plus-signin class="button vermelho fit small icon fa-google-plus"  clientid="1000165596977-aunr7magne3328g0mvrjdim5aq6sijnc" name="google+" style="font-size:0.8em">Login com Google+</button>
+						</div>
+					</div>
+					<div class="row uniform" ng-show="optionBuy">
+						<div class="12u">
+							<button ng-click="go('/buy-no-register')" class="button azul_claro fit small icon fa-unlock-alt" name="anonymous">Comprar sem registrar no site</button>
+						</div>
+					</div>
+					<div class="row uniform">
+						<div class="12u">
+							<h5>Entre com a sua conta Snack4me:</h5>
+						</div>
+					</div>
+					<div class="row uniform">
+						<div class="12u input-group">
+							<span class="input-group-addon"><i class="fa fa-user"></i></span>
+							<input type="email" name="email" ng-model="email" placeholder="Email" class="form-control">
+						</div>
+					</div>
+					<div class="row uniform">
+						<div class="12u input-group">
+							<span class="input-group-addon"><i class="fa fa-key"></i></span>
+							<input type="password" name="password" ng-model="password" placeholder="Senha" class="form-control">
+						</div>
+					</div>
+					<div class="row uniform" ng-show="error">
+						<div class="12u input-group">
+							<div ng-show="error" class="msg-alert alert-danger">{{error}}</div>
+						</div>
+					</div>
+					<div class="row uniform collapse-at-2">
+						<div class="8u">
+							<a ng-click="go('/forgot-password')">Esqueceu a senha?</a>
+						</div>
+						<div class="4u align-right">
+							<img src="images/loading_pequeno.gif" ng-if="dataLoading" />
+							<input type="button" ng-click="loginCustomer()" class="button azul_escuro" value="Entrar" style="width:100%">
+						</div>
+					</div>
+					<div style="height:13px">
+					</div>
+				</form>
+			</div>
+			
+			<div class="5u box" style="margin-left: 10px !important;">
+				<form ng-submit="registerCustomer()">
+					<div class="row uniform box-padding-top">
+						<div class="12u">
+							<h3 style="text-transform: uppercase;">Registrar conta</h3>
+						</div>
+					</div>
+					<div class="row uniform" ng-show="optionBuy">
+						<div class="12u">
+							<h5>Informe os campos:</h5>
+						</div>
+					</div>
+					<div class="row uniform">
+						<div class="12u input-group">
+							<span class="input-group-addon"><i class="fa fa-user"></i></span>
+							<input type="text" ng-model="sign_name" placeholder="Nome" class="form-control">
+						</div>
+					</div>
+					<div class="row uniform">
+						<div class="12u input-group">
+							<span class="input-group-addon"><i class="fa fa-user"></i></span>
+							<input type="email" ng-model="sign_email" placeholder="Email" class="form-control">
+						</div>
+					</div>
+					<div class="row uniform">
+						<div class="12u input-group">
+							<span class="input-group-addon"><i class="fa fa-key"></i></span>
+							<input type="password" ng-model="sign_password" placeholder="Senha" class="form-control">
+						</div>
+					</div>
+					<div class="row uniform">
+						<div class="12u input-group">
+							<span class="input-group-addon"><i class="fa fa-key"></i></span>
+							<input type="password" ng-model="sign_confirm_password" placeholder="Confirma Senha" class="form-control">
+						</div>
+					</div>
+					<div class="row uniform" ng-show="messageRegister">
+						<div class="12u input-group">
+							<div ng-show="messageRegister">{{messageRegister}}</div>
+						</div>
+					</div>
+					<div class="row uniform collapse-at-2">
+						<div class="8u">
+							<input type="checkbox" ng-model="use_terms" id="use-terms" name="use-terms">
+							<label for="use-terms" style="font-size: 12px;">Concordo com os termos de uso</label>
+						</div>
+						<div class="4u align-right">
+							<img src="images/loading_pequeno.gif" ng-if="dataLoadingRegister" />
+							<input type="submit" class="button azul_escuro" value="Registrar" style="width:100%">
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>

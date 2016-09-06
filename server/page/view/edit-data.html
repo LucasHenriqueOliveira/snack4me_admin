@@ -1,0 +1,47 @@
+<section id="main" class="container">
+	<div class="row">
+		<div class="12u box">
+			<form ng-submit="editData()">
+				<div class="row uniform box-padding-top">
+					<div class="12u">
+						<h3>Editar dados</h3>
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="12u">
+						<h5>Para alteração dos dados, informe os campos abaixo.</h5>
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="12u">
+						<input type="email" ng-model="edit_email" ng-value="edit_email">
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="12u">
+						<input type="text" ng-model="edit_name" ng-value="edit_name">
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="12u">
+						<input type="password" ng-model="edit_password" placeholder="Informe a sua senha">
+					</div>
+				</div>
+				<div class="row uniform" ng-show="message_edit_data">
+					<div class="12u input-group">
+						<div ng-class="messageClassAlert">{{message_edit_data}}</div>
+					</div>
+				</div>
+				<div class="row uniform">
+					<div class="6u">
+						<input type="submit" class="button azul_escuro" value="Salvar" style="width:100%">
+						<img src="images/loading_pequeno.gif" ng-if="dataLoading" />
+					</div>
+					<div class="6u">
+						<input type="button" ng-click="go('/page-personal')" class="button azul_escuro" value="Voltar" style="width:100%">
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</section>

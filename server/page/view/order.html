@@ -1,0 +1,75 @@
+<section id="main" class="container">
+	<div class="row" ng-hide="messageOrder">
+		<div class="3u box">
+			<div class="row uniform box-padding-top">
+				<div class="12u">
+					<h4>Pedido {{num_order}} - {{status_order['pt']}}</h4>
+				</div>
+			</div>
+			<div class="row uniform">
+				<div class="12u">
+					<ul class="totals" style="padding-top: 0;">
+						<li>Data do pedido: {{date}}</li>
+						<li>Horário do pedido: {{hour}}</li>
+						<li>{{event_name}}</li>
+						<li>Andar: {{floor}}</li>
+						<li>Apartamento: {{seat}}</li>
+						<li ng-show="local['pt']">Local para entrega: {{local['pt']}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<div class="9u">
+			<div class="row uniform">
+				<div class="12u">
+					<div class="products_location">
+						<table width='100%'>
+							<tr>
+								<th style='background: #f1f1f1;'>Produtos</th>
+								<th style='background: #f1f1f1;'>Preço</th>
+								<th style='background: #f1f1f1;'>Qtd</th>
+								<th style='background: #f1f1f1;'>Subtotal</th>
+							</tr>
+							<tr ng-repeat="product in products">
+								<td>
+									<strong>{{product.name['pt']}}</strong><br />
+									<ul style="font-size: 12px;">
+										<li ng-repeat="type in product.type">
+											<span ng-show="type.name['pt']">- {{type.name['pt']}}<br /></span>
+											<span ng-show="type.comment">p.s.: {{type.comment}}</span>
+										</li>
+									</ul>
+								</td>
+								<td>{{product.price_unit}}</td>
+								<td>{{product.quantity}}</td>
+								<td>{{product.price_total}}</td>
+							</tr>
+							<tr>
+								<td colspan='3' style='text-align: right'>Subtotal (R$)</td>
+								<td>{{price}}</td>
+							</tr>
+							<tr>
+								<td colspan='3' style='text-align: right'>Desconto (R$)</td>
+								<td>{{discount}}</td>
+							</tr>
+							<tr>
+								<td colspan='3' style='text-align: right'>Taxa de Serviço (R$)</td>
+								<td>{{tax_service}}</td>
+							</tr>
+							<tr>
+								<td colspan='3' style='text-align: right'><strong>Total (R$)</strong></td>
+								<td><strong>{{price_total}}</strong></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row" ng-show="messageOrder">
+		<div class="12u input-group">
+			<div class="msg-alert alert-warning">{{messageOrder}}</div>
+		</div>
+	</div>
+</section>

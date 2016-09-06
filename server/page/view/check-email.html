@@ -1,0 +1,29 @@
+<section id="main" class="container">
+	<div class="row">
+		<div class="12u box">
+			<div class="row uniform box-padding-top">
+				<div class="12u">
+					<h3>Confirmação de Email</h3>
+				</div>
+			</div>
+			<div class="row uniform" ng-show="dataLoading">
+				<div class="12u">
+					<img src="images/loading_pequeno.gif" />
+				</div>
+			</div>
+			<div class="row uniform">
+				<div class="12u input-group">
+					<div ng-class="messageClassAlert">{{message_check_email}}</div>
+				</div>
+			</div>
+			<div class="row uniform">
+				<div class="6u">
+					<input type="button" ng-click="go('/cart')" class="button azul_escuro" value="Meu carrinho" style="width:100%">
+				</div>
+				<div class="6u">
+					<input type="button" ng-click="go('/page-personal')" class="button azul_escuro" value="Minha Conta" style="width:100%">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

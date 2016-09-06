@@ -1,0 +1,39 @@
+<section id="main" class="container">
+	<div class="row">
+		<div class="12u box">
+			<div class="row uniform box-padding-top">
+				<div class="12u input-group">
+					<div class="msg-alert alert-success">O seu pedido {{num_order}} foi realizado com sucesso!</div>
+				</div>
+			</div>
+			<div class="row uniform">
+				<div class="12u" ng-hide="msgBuyingOpinion">
+					<span ng-repeat="rating in ratings">Sua opinião é muito importante para medirmos a sua experiência de compra e sua satisfação. Selecione a quantidade de estrelas.
+						<div star-rating rating-value="rating.current" max="rating.max" ng-click="getSelectedRating(rating.current)"></div>
+					</span>
+				</div>
+				<div class="12u" ng-show="msgBuyingOpinion">
+					<span>{{msgBuyingOpinion}}</span>
+				</div>
+				<div class="12u align-center" ng-show="dataLoading">
+					<img src="images/loading_pequeno.gif" />
+				</div>
+			</div>
+			<div class="row uniform">
+				<div class="12u">
+					<h5>Favor apresentar o QR Code na entrega do produto.</h5>
+				</div>
+			</div>
+			<div class="row uniform">
+				<div class="12u align-center">
+					<img ng-src="{{url}}" alt="Pedido"/>
+				</div>
+			</div>
+			<div class="row uniform">
+				<div class="12u align-center">
+					<input type="button" ng-click="go('/event')" class="button azul_escuro" style="width: 100%;" value="Faça um novo pedido">
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
