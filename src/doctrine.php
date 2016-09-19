@@ -3,8 +3,10 @@
 use Doctrine\ORM\Tools\Setup;
 use Doctrine\ORM\EntityManager;
 
+
+
 $paths = [
-	__DIR__ . "/Entities"
+	__DIR__ . "/Entity"
 ]; 
 $isDevMode = true;
 
