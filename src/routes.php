@@ -56,15 +56,16 @@ $app->get('/', function (Request $request, Response $response) {
 
 
 $app->get('/users', function (Request $request, Response $response) use ($entityManager){
+
+
+
     try{
         $repository = $entityManager->getRepository(User::class);
         $usuarios = $repository->findAll();
 
-        foreach ($usuarios as $usuario){
-            print_r( $usuario->getUserDthActivation()) .  "<br/>";
-        }
-        die;
-        return $response
+       
+die;
+     return $response
             ->withHeader("Content-Type", "application/json")
             ->write(json_encode($usuarios, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
     }catch (Exception $e){

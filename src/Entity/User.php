@@ -242,7 +242,7 @@ class User
      */
     public function getUserDthActivation()
     {
-            var_dump(new \DateTimeZone($this->zoneDthActivation));
+
         return $this->userDthActivation->setTimeZone(new \DateTimeZone($this->zoneDthActivation));
 
     }
@@ -280,7 +280,8 @@ class User
      */
     public function getUserDthDeactivation()
     {
-        return $this->userDthDeactivation->setTimeZone(new \DateTimeZone($this->zoneDthDeactivation));
+        $data = $this->userDthDeactivation->setTimeZone(new \DateTimeZone($this->zoneDthDeactivation));
+        return $data->format('d-m-Y h:m:s');
 
     }
 
@@ -360,10 +361,10 @@ class User
     /**
      * @param mixed $zoneDthActivation
      */
-    public function setZoneDthActivation($zoneDthActivation)
-    {
-        $this->zoneDthActivation = $zoneDthActivation;
-    }
+        public function setZoneDthActivation($zoneDthActivation)
+        {
+            $this->zoneDthActivation = $zoneDthActivation;
+        }
 
     /**
      * @return mixed
