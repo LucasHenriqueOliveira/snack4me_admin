@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Entity;
-
-
+use Doctrine\ORM\Mapping\Entity;
 
 /**
  * @Entity
@@ -242,8 +241,11 @@ class User
      */
     public function getUserDthActivation()
     {
-
-        return $this->userDthActivation->setTimeZone(new \DateTimeZone($this->zoneDthActivation));
+		$userDthActivation = null;
+    	if(!is_null($this->zoneDthActivation )){
+			$userDthActivation = $this->userDthActivation->setTimeZone(new \DateTimeZone($this->zoneDthActivation))->format('d-m-Y H:i:s');
+		}
+        return $userDthActivation;
 
     }
 
@@ -280,9 +282,12 @@ class User
      */
     public function getUserDthDeactivation()
     {
-        $data = $this->userDthDeactivation->setTimeZone(new \DateTimeZone($this->zoneDthDeactivation));
-        return $data->format('d-m-Y h:m:s');
-
+		$userDthDeactivation = null;
+		if(!is_null($this->zoneDthDeactivation )){
+			$userDthDeactivation = $this->userDthDeactivation->setTimeZone(new \DateTimeZone($this->zoneDthDeactivation))->format('d-m-Y H:i:s');
+		}
+		return $userDthDeactivation;
+	 
     }
 
     /**
@@ -299,10 +304,14 @@ class User
      * @return mixed
      */
     public function getUserDthUpdate()
-    {
-        return $this->userDthUpdate->setTimeZone(new \DateTimeZone($this->zoneDthUpdate));
-
-    }
+	{
+		$userDthUpdate = null;
+		if (!is_null($this->zoneDthUpdate)) {
+			$userDthUpdate = $this->userDthUpdate->setTimeZone(new \DateTimeZone($this->zoneDthUpdate))->format('d-m-Y H:i:s');
+		}
+		return $userDthUpdate;
+	
+	}
 
     /**
      * @param mixed $userDthUpdate
@@ -397,6 +406,41 @@ class User
     {
         $this->zoneDthUpdate = $zoneDthUpdate;
     }
+
+
+    /**
+     * @param User $obj
+     * @return mixed
+     */
+    public static function toArray(Array $obj)
+    {
+		$users = array();
+        foreach ($obj as $o){
+            $data['userId']  = $o->getUserId();
+            $data['userName']  = $o->getUserName();
+            $data['userPassword']  = $o->getUserPassword();
+            $data['userActive']  = $o->getUserActive();
+            $data['userProfileId']  = $o->getUserProfileId();
+            $data['userLoginDefault']  = $o->getUserLoginDefault();
+            $data['userIdActivation']  = $o->getUserIdActivation();
+            $data['userDthActivation']  = $o->getUserDthActivation();
+            $data['userIdDeactivation']  = $o->getUserIdDeactivation();
+
+            $data['userDthDeactivation']  = $o->getUserDthDeactivation();
+            $data['userDthUpdate']  = $o->getUserDthUpdate();
+            $data['userToken']  = $o->getUserToken();
+            $data['zoneDthActivation']  = $o->getZoneDthActivation();
+            $data['zoneDthDeactivation']  = $o->getZoneDthDeactivation();
+            $data['zoneDthUpdate']  = $o->getZoneDthUpdate();
+ 
+          	$users[] = $data;
+			
+			 
+        }
+
+        return  $users;
+    }
+
 
 
 

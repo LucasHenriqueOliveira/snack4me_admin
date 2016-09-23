@@ -1,7 +1,5 @@
 <?php
-ini_set("display_errors",1);
-ini_set("display_startup_erros",1);
-error_reporting(E_ALL);
+
 
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
@@ -48,6 +46,7 @@ $app->get('/', function (Request $request, Response $response) {
 
     #$response->getBody()->write("URL Incompleta");
     $data = "URL Incompleta";
+    
     return $response
         ->withHeader("Content-Type", "application/json")
         ->write(json_encode($data, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
@@ -57,20 +56,21 @@ $app->get('/', function (Request $request, Response $response) {
 
 $app->get('/users', function (Request $request, Response $response) use ($entityManager){
 
-
-
     try{
         $repository = $entityManager->getRepository(User::class);
-        $usuarios = $repository->findAll();
+        $users = $repository->findAll();
 
-       
-die;
-     return $response
+        $arrayUsers = User::toArray($users);
+	
+		 
+        return $response
             ->withHeader("Content-Type", "application/json")
-            ->write(json_encode($usuarios, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
+            ->write(json_encode($arrayUsers, JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT));
     }catch (Exception $e){
-
+        echo $e;
     }
+
+
 
 
 
