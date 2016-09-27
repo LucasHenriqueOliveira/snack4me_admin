@@ -6,29 +6,28 @@
             <div class="col-md-12">
                 <!--breadcrumbs start -->
                 <ul class="breadcrumb">
-                    <li><a href="#/"><i class="fa fa-dashboard"></i> Painel</a></li>
+                    <li><a href="#/"><i class="fa fa-bar-chart"></i> Dashboard</a></li>
                     <li class="active">Usuários</li>
                 </ul>
                 <!--breadcrumbs end -->
             </div>
         </div>
 
-        <div class="row" ng-controller="UsersController">
-
+        <div class="row">
             <div class="col-sm-12">
                 <section class="panel">
                     <header class="panel-heading">
                         Usuários
-                            <span class="tools pull-right">
+                        <span class="tools pull-right">
                                 <a href="javascript:;" class="fa fa-chevron-down"></a>
                                 <a href="javascript:;" class="fa fa-times"></a>
                             </span>
                     </header>
-                    <div class="panel-body">
-                        <div class="adv-table editable-table" ng-show="vm.usersAvailable.length">
+                    <div class="panel-body" ng-show="vm.users.length">
+                        <div class="adv-table editable-table ">
                             <div class="clearfix">
                                 <div class="btn-group">
-                                    <a href data-target="#myModal" data-toggle="modal" id="editable-sample_new" class="btn btn-primary">
+                                    <a href="#" class="btn btn-primary">
                                         <i class="fa fa-plus"></i> Novo
                                     </a>
                                 </div>
@@ -46,34 +45,32 @@
                             <table class="display table table-hover table-bordered table-striped table-condensed">
                                 <thead>
                                 <tr>
-                                    <th>Nome</th>
-                                    <th>Perfil</th>
+                                    <th class="text-center">Nome</th>
+                                    <th class="text-center">Perfil</th>
                                     <th class="text-center">Ação</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="user in vm.users">
-                                    <td>{{user.usuario_name}}</td>
-                                    <td>{{user.usuario_profile}}</td>
+
+                                    <td>{{user.name}}</td>
+                                    <td class="center">{{user.profile}}</td>
                                      <td class="todo-actionlist center">
                                         <a href ng-click="vm.editUser(user)" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>
-                                        <a href ng-click="vm.removeUser(user)" class="todo-remove icon-center" title="Desativar"><i class="ico-close"></i></a>
+                                        <a href ng-click="vm.removeUser(user)" class="todo-remove icon-center" title="Remover"><i class="ico-close"></i></a>
                                     </td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div ng-show="!vm.usersAvailable.length">
+                        <div ng-show="!vm.users.length">
                             <p>Não existem usuários ativos.</p>
                         </div>
                     </div>
                 </section>
             </div>
         </div>
-
-
     </div>
     <!-- page end-->
 </div>
 <!--main content end-->
-

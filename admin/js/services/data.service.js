@@ -91,13 +91,13 @@
 
                 var deferred = $q.defer();
 
-                 $http({
+                $http({
                     method: 'POST',
                     url: CONFIG.url + 'dashboard.php',
                     data: {
                         company: company
                     }
-                 })
+                })
                     .then(function(response) {
 
                         deferred.resolve(response.data);
@@ -122,13 +122,11 @@
                 $http({
                     method: 'GET',
                     url: DOCTRINE.url + 'userslist',
-                    params: {}
+                    params: {company: company}
                 })
                     .then(function(response) {
 
                         deferred.resolve(response.data);
-
-
                     }, function(error) {
                         console.log(error);
                     });
