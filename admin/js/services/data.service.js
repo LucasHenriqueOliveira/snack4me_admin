@@ -5,9 +5,9 @@
         .module('app')
         .factory('DataService', DataService);
 
-    DataService.$inject = ['$localstorage', '$timeout', '$http', '$q', 'CONFIG'];
+    DataService.$inject = ['$localstorage', '$timeout', '$http', '$q', 'CONFIG','DOCTRINE'];
 
-    function DataService($localstorage, $timeout, $http, $q, CONFIG){
+    function DataService($localstorage, $timeout, $http, $q, CONFIG,DOCTRINE){
         var currentProduct = '';
 
         return {
@@ -109,6 +109,34 @@
 
                 return deferred.promise;
             },
+
+
+
+
+            getUsers: function() {
+
+                var company = 1;
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'GET',
+                    url: DOCTRINE.url + 'userslist',
+                    params: {}
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+
+
 
             getProducts: function() {
 

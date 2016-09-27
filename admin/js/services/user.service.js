@@ -26,7 +26,7 @@
 
         function getUsers() {
             var id = $localstorage.getObject('company');
-            return $http.get(baseURL + 'users/' + id).then(handleSuccess, handleError('Error getting all users'));
+            return $http.get(baseURL + 'userslist').then(handleSuccess, handleError('Error getting all users'));
         }
 
         function getById(id) {
