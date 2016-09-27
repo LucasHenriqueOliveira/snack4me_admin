@@ -5,11 +5,11 @@
         .module('app')
         .factory('UserService', UserService);
 
-    UserService.$inject = ['$http', '$localstorage', 'CONFIG'];
-    function UserService($http, $localstorage, CONFIG) {
+    UserService.$inject = ['$http', '$localstorage', 'DOCTRINE'];
+    function UserService($http, $localstorage, DOCTRINE) {
         var service = {};
         var currentUser = {};
-        var baseURL = CONFIG.url;
+        var baseURL = DOCTRINE.url;
 
         service.getUsers = getUsers;
         service.getById = getById;
