@@ -5,9 +5,9 @@
         .module('app')
         .controller('UsersController', UsersController);
 
-    UsersController.$inject = ['$location', 'UserService', '$localstorage','DataService'];
+    UsersController.$inject = ['$location', 'UserService', '$localstorage','DataService','$scope','Timezones'];
 
-    function UsersController($location, UserService, $localstorage, DataService) {
+    function UsersController($location, UserService, $localstorage, DataService,$scope,Timezones) {
         var vm = this;
 
         vm.getUsers = function() {
@@ -17,6 +17,40 @@
         };
 
         vm.getUsers();
+        vm.username = ''
+
+        vm.profiles = [
+            { id : 1, name:'Entregador'},
+            { id : 2, name:'Administrativo'},
+            { id : 3, name:'Administrador Geral'},
+            { id : 4, name:'Gerente'},
+        ];
+
+
+        vm.submitAddUser = function(form){
+
+
+
+            var postData = {
+                profileId: form.profileSelect.id,
+                username: form.username,
+                zone: $timezones.getLocal(),
+                company: 1
+
+            };
+
+
+
+            DataService.submitAddUser(postData).then(function(response) {
+
+                if(response.error === false) {
+                     $location.path('/users');
+
+                } else {
+                    toastr.error(response.message, 'Cadastro de usuário', {timeOut: 3000});
+                }
+            });
+        };
 
 
 

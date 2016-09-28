@@ -133,6 +133,26 @@
 
                 return deferred.promise;
             },
+            submitAddUser: function(postData) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'POST',
+                    url: DOCTRINE.url + 'users/incluir',
+                    data: postData
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
 
 
 

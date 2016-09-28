@@ -75,6 +75,15 @@
                 }
             })
 
+            .when('/add-user', {
+                controller: 'UsersController',
+                templateUrl: 'templates/add-user.html',
+                controllerAs: 'vm',
+                access: {
+                    requiredLogin: true
+                }
+            })
+
             .when('/user', {
                 controller: 'UserController',
                 templateUrl: 'templates/user.html',
