@@ -5,9 +5,9 @@
         .module('app')
         .controller('UsersController', UsersController);
 
-    UsersController.$inject = ['$location', 'UserService', '$localstorage','DataService','$scope','Timezones'];
+    UsersController.$inject = ['$location', 'UserService', '$localstorage','DataService','$scope','TimezoneService'];
 
-    function UsersController($location, UserService, $localstorage, DataService,$scope,Timezones) {
+    function UsersController($location, UserService, $localstorage, DataService,$scope,TimezoneService) {
         var vm = this;
 
         vm.getUsers = function() {
@@ -38,6 +38,8 @@
                 company: 1
 
             };
+
+
 
 
 
