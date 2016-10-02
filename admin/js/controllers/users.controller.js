@@ -6,7 +6,7 @@
         .module('app')
         .controller('UsersController', UsersController);
 
-    UsersController.$inject = ['$location', 'UserService', '$localstorage','DataService','$scope'   ];
+    UsersController.$inject = ['$location', 'UserService', '$localstorage','DataService','$scope' ];
 
     function UsersController($location, UserService, $localstorage, DataService,$scope) {
         var vm = this;
@@ -41,7 +41,9 @@
             DataService.submitAddUser(postData).then(function(response) {
 
                 if(response.error === false) {
-                     $location.path('/users');
+                    $location.path('/users');
+                    toastr.success("Cadastro Efetuado com Sucesso",'Cadastro de usuário', {timeOut: 3000});
+
 
                 } else {
                     toastr.error(response.message, 'Cadastro de usuário', {timeOut: 3000});
