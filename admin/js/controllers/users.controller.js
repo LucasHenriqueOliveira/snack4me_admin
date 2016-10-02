@@ -1,3 +1,4 @@
+/* jstz*/
 (function () {
     'use strict';
 
@@ -5,9 +6,9 @@
         .module('app')
         .controller('UsersController', UsersController);
 
-    UsersController.$inject = ['$location', 'UserService', '$localstorage','DataService','$scope','TimezoneService'];
+    UsersController.$inject = ['$location', 'UserService', '$localstorage','DataService','$scope'   ];
 
-    function UsersController($location, UserService, $localstorage, DataService,$scope,TimezoneService) {
+    function UsersController($location, UserService, $localstorage, DataService,$scope) {
         var vm = this;
 
         vm.getUsers = function() {
@@ -29,19 +30,13 @@
 
         vm.submitAddUser = function(form){
 
-
-
             var postData = {
-                profileId: form.profileSelect.id,
-                username: form.username,
-                zone: $timezones.getLocal(),
-                company: 1
+                "profileId": form.profileSelect.id,
+                "username": form.username,
+                "zone": jstz.determine().name(),
+                "company": 1
 
             };
-
-
-
-
 
             DataService.submitAddUser(postData).then(function(response) {
 

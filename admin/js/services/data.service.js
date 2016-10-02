@@ -137,10 +137,11 @@
 
                 var deferred = $q.defer();
 
+
                 $http({
                     method: 'POST',
                     url: DOCTRINE.url + 'users/incluir',
-                    data: postData
+                    data: JSON.parse(JSON.stringify(postData))
                 })
                     .then(function(response) {
 
