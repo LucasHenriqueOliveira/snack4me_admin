@@ -83,6 +83,14 @@
                     requiredLogin: true
                 }
             })
+            .when('/edit-user/:id', {
+                controller: 'EditUsersController',
+                templateUrl: 'templates/edit-user.html',
+                controllerAs: 'vm',
+                access: {
+                    requiredLogin: true
+                }
+            })
 
             .when('/user', {
                 controller: 'UserController',
@@ -94,7 +102,7 @@
             })
 
             .when('/edit-user', {
-                controller: 'EditUserController',
+                controller: 'EditUsersController',
                 templateUrl: 'templates/edit-user.html',
                 controllerAs: 'vm',
                 access: {

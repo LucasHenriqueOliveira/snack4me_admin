@@ -21,8 +21,18 @@
         service.setCurrentUser = setCurrentUser;
         service.getCurrentUser = getCurrentUser;
         service.changePassword = changePassword;
+        service.getPerfis = getPerfis;
 
         return service;
+
+        function getPerfis() {
+            return [
+                { id : 1, name:'Entregador'},
+                { id : 2, name:'Administrativo'},
+                { id : 3, name:'Administrador Geral'},
+                { id : 4, name:'Gerente'},
+            ];
+        }
 
         function getUsers() {
             var id = $localstorage.getObject('company');

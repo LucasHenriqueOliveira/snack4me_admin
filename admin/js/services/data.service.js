@@ -9,6 +9,7 @@
 
     function DataService($localstorage, $timeout, $http, $q, CONFIG,DOCTRINE){
         var currentProduct = '';
+        var currentUser = '';
 
         return {
 
@@ -133,6 +134,16 @@
 
                 return deferred.promise;
             },
+
+            setCurrentUser: function (user) {
+                currentUser = user;
+            },
+
+            getCurrentUser: function () {
+                return currentUser;
+            },
+
+
             submitAddUser: function(postData) {
 
                 var deferred = $q.defer();
@@ -142,6 +153,46 @@
                     method: 'POST',
                     url: DOCTRINE.url + 'users/incluir',
                     data: JSON.parse(JSON.stringify(postData))
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+            submitEditUser: function(postData, id) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'PUT',
+                    url: DOCTRINE.url + 'users/editar/' + id,
+                    data: postData
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+            removeUser: function(postData) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'POST',
+                    url: DOCTRINE.url + 'users/remover',
+                    data: postData
                 })
                     .then(function(response) {
 
