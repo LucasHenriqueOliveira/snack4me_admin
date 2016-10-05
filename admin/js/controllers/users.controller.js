@@ -41,12 +41,12 @@
             if(confirm("Deseja remover o usuário " + user.name.toUpperCase() + " ?")){
                 DataService.removeUser(postData).then(function (data) {
                     if(data.error) {
-                        toastr.error(data.message, 'Usuário', {timeOut: 3000});
+                        toastr.error('Removido com sucesso', 'Usuário', {timeOut: 3000});
                     } else {
                         toastr.success(data.message, 'Usuário', {timeOut: 3000});
                     }
+                    vm.getUsers();
 
-                    $location.path('/users');
                 });
             }
             return false;

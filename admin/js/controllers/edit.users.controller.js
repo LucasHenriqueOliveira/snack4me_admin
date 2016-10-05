@@ -39,7 +39,7 @@
             };
 
 
-            DataService.submitEditUser(postData,id).then(function(response) {
+            DataService.submitEditUser(postData,vm.users.id).then(function(response) {
 
                 if(response.error === false) {
 
