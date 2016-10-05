@@ -119,10 +119,12 @@
                 var company = 1;
 
                 var deferred = $q.defer();
+                var d =  new  Date().getTime();
+
 
                 $http({
                     method: 'GET',
-                    url: DOCTRINE.url + 'userslist',
+                    url: DOCTRINE.url + 'userslist/d=' + d,
                     params: {company: company}
                 })
                     .then(function(response) {

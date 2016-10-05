@@ -23,6 +23,7 @@
         vm.profiles = UserService.getPerfis();
 
         vm.editUser = function(user) {
+
             DataService.setCurrentUser(user);
             $location.path('/edit-user/' + user.id);
         };
@@ -44,6 +45,7 @@
                     } else {
                         toastr.success(data.message, 'Usuário', {timeOut: 3000});
                     }
+
                     $location.path('/users');
                 });
             }
@@ -65,13 +67,16 @@
             DataService.submitAddUser(postData).then(function(response) {
 
                 if(response.error === false) {
-                    $location.path('/users');
+
                     toastr.success("Cadastro Efetuado com Sucesso",'Cadastro de usuário', {timeOut: 3000});
 
 
                 } else {
                     toastr.error(response.message, 'Cadastro de usuário', {timeOut: 3000});
+
                 }
+
+                $location.path('/users');
             });
         };
 

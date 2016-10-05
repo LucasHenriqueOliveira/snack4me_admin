@@ -75,6 +75,8 @@
                 }
             })
 
+
+
             .when('/add-user', {
                 controller: 'UsersController',
                 templateUrl: 'templates/add-user.html',

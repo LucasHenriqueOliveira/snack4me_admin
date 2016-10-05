@@ -15,6 +15,7 @@
         vm.profiles = UserService.getPerfis();
 
 
+
         vm.username = vm.users.name;
         vm.profileSelectId = vm.users.profile_id;
 
@@ -41,12 +42,13 @@
             DataService.submitEditUser(postData,id).then(function(response) {
 
                 if(response.error === false) {
-                    $location.path('/users');
+
                     toastr.success("Cadastro Editado com Sucesso",'Edição de usuário', {timeOut: 3000});
 
                 } else {
                     toastr.error(response.message, 'Edição de usuário', {timeOut: 3000});
                 }
+                $location.path('/users');
             });
         };
 
