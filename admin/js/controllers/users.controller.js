@@ -33,14 +33,14 @@
             var postData = {
                 "id": user.id,
                 "zone": jstz.determine().name(),
-                "userDesactivationId": 2
+                "userDesactivationId": $localstorage.get("id")
 
             };
 
 
             if(confirm("Deseja remover o usuário " + user.name.toUpperCase() + " ?")){
                 DataService.removeUser(postData).then(function (data) {
-                    if(data.error) {
+                    if(data.error === false) {
                         toastr.error('Removido com sucesso', 'Usuário', {timeOut: 3000});
                     } else {
                         toastr.success(data.message, 'Usuário', {timeOut: 3000});
@@ -59,8 +59,8 @@
                 "profileId": form.profileSelect.id,
                 "username": form.username,
                 "zone": jstz.determine().name(),
-                "company": 1,
-                "userActivationId": 2
+                "company": $localstorage.get("company"),
+                "userActivationId": $localstorage.get("id")
 
             };
 

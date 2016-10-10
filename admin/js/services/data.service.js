@@ -88,7 +88,7 @@
             getDataDashboard: function() {
 
                 //var company = $localstorage.getObject('company');
-                var company = 1;
+                var company = $localstorage.get('company');
 
                 var deferred = $q.defer();
 
@@ -111,12 +111,9 @@
                 return deferred.promise;
             },
 
-
-
-
             getUsers: function() {
 
-                var company = 1;
+                var company = $localstorage.get('company');
 
                 var deferred = $q.defer();
                 var d =  new  Date().getTime();
@@ -212,8 +209,8 @@
 
             getProducts: function() {
 
-                //var company = $localstorage.getObject('company');
-                var company = 1;
+
+                var company = $localstorage.get('company');;
 
                 var deferred = $q.defer();
 

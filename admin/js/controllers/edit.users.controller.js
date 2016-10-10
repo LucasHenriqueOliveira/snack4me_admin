@@ -34,7 +34,7 @@
                 "profileId": id,
                 "username": form.username,
                 "zone": jstz.determine().name(),
-                "company": 1
+                "company": $localstorage.get("company")
 
             };
 
