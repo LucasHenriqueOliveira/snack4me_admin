@@ -216,7 +216,7 @@
 
                 $http({
                     method: 'GET',
-                    url: CONFIG.url + 'produtos.php',
+                    url: DOCTRINE.url + 'products',
                     params: {company: company}
                 })
                     .then(function(response) {
@@ -239,22 +239,17 @@
                 return currentProduct;
             },
 
-            removeProduct: function(id) {
+            removeProduct: function(postData) {
 
                 var deferred = $q.defer();
 
                 $http({
                     method: 'POST',
-                    url: CONFIG.url + 'remove-produto.php',
-                    data: {
-                        id: id
-                    }
+                    url: DOCTRINE.url + 'products/remover',
+                    data: postData
                 })
                     .then(function(response) {
-
                         deferred.resolve(response.data);
-
-
                     }, function(error) {
                         console.log(error);
                     });

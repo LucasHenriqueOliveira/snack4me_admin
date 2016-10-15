@@ -58,8 +58,8 @@
                                     <td class="center">{{produto.product_number}}</td>
                                     <td>{{produto.product_name_pt}}</td>
                                     <td class="center">{{produto.product_price | currency}}</td>
-                                    <td class="center">{{produto.product_hour_initial.substring(0, 5)}}</td>
-                                    <td class="center">{{produto.product_hour_final.substring(0, 5)}}</td>
+                                    <td class="center">{{produto.product_hour_initial}}</td>
+                                    <td class="center">{{produto.product_hour_final}}</td>
                                     <td class="todo-actionlist center">
                                         <a href ng-click="vm.getProduct(produto)" class="todo-done icon-center" title="Detalhes"><i class="fa fa-plus-square"></i></a>
                                         <!--<a href ng-click="vm.editProduct(produto)" class="todo-edit icon-center" title="Editar"><i class="ico-pencil"></i></a>-->

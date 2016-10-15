@@ -12,7 +12,6 @@
         $scope.user = false;
         if(AuthenticationService.IsLogged()) {
             if($localstorage.get('roles_id') == 3){
-
                 $scope.user = true;
             }
             $location.path('/');

@@ -29,14 +29,25 @@
         };
 
         vm.removeProduct = function(product) {
-            DataService.removeProduct(product.product_id).then(function (data) {
-                if(data.error) {
-                    toastr.error(data.message, 'Produto', {timeOut: 3000});
-                } else {
-                    toastr.success(data.message, 'Produto', {timeOut: 3000});
-                }
-                vm.getProducts();
-            });
+
+            var postData = {
+                "id": product.product_id
+
+
+            };
+
+            if(confirm("Deseja remover o Produto: " + product.product_name_pt.toUpperCase() + " ?")) {
+                DataService.removeProduct(postData).then(function (data) {
+
+                    if (data.error === false) {
+                        toastr.success(data.message, 'Produto', {timeOut: 3000});
+                    } else {
+                        toastr.error(data.message, 'Produto', {timeOut: 3000});
+                    }
+                    vm.getProducts();
+                });
+            }
+
         };
 
         vm.activeProduct = function(truck) {
