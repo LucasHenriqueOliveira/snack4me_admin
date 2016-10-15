@@ -213,10 +213,11 @@
                 var company = $localstorage.get('company');;
 
                 var deferred = $q.defer();
+                var d =  new  Date().getTime();
 
                 $http({
                     method: 'GET',
-                    url: DOCTRINE.url + 'products',
+                    url: DOCTRINE.url + 'products/d=' +d,
                     params: {company: company}
                 })
                     .then(function(response) {
