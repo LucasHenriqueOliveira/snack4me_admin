@@ -1,3 +1,4 @@
+/* jstz*/
 (function () {
     'use strict';
 
@@ -5,9 +6,9 @@
         .module('app')
         .controller('AddTruckController', AddTruckController);
 
-    AddTruckController.$inject = ['DataService', '$localstorage', '$location', '$scope', '$filter', 'TruckService', '$rootScope', 'PartService'];
+    AddTruckController.$inject = ['DataService', '$localstorage', '$location', '$scope', '$filter', '$rootScope'];
 
-    function AddTruckController(DataService, $localstorage, $location, $scope, $filter, TruckService, $rootScope, PartService) {
+    function AddTruckController(DataService, $localstorage, $location, $scope, $filter, $rootScope) {
         var vm = this;
         vm.message_part = '';
         vm.message_part_edit = '';
@@ -28,8 +29,10 @@
         vm.getComplementos();
 
         DataService.getCategory().then(function(data){
+
             vm.categorias = data.response;
         });
+
 
         vm.submitComplement = function(complement) {
             vm.complementos = $localstorage.getObject('complementos');
@@ -81,19 +84,21 @@
 
         vm.submitProduct = function(form) {
             var postData = {
-                categoria: form.categoriaSelected.id,
-                numero: form.product.numero,
-                hora_fim: form.product.hour_final,
-                hora_inicio: form.product.hour_initial,
-                price: form.product.price,
-                nome_en: form.product.name_en,
-                nome_es: form.product.name_es,
-                nome_pt: form.product.name_pt,
-                desc_en: form.product.desc_en,
-                desc_es: form.product.desc_es,
-                desc_pt: form.product.desc_pt,
-                fast: form.product.fast,
-                qtd_complemento: form.complementos.length
+                "categoria": form.categoriaSelected.id,
+                "numero": form.product.numero,
+                "hora_fim": form.product.hour_final,
+                "hora_inicio": form.product.hour_initial,
+                "price": form.product.price,
+                "nome_en": form.product.name_en,
+                "nome_es": form.product.name_es,
+                "nome_pt": form.product.name_pt,
+                "desc_en": form.product.desc_en,
+                "desc_es": form.product.desc_es,
+                "desc_pt": form.product.desc_pt,
+                "fast": form.product.fast,
+                "qtd_complemento" : form.complementos.length,
+                "company" : $localstorage.get('company'),
+                "zone" : jstz.determine().name(),
             };
 
             var idx = 0;

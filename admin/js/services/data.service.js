@@ -210,7 +210,7 @@
             getProducts: function() {
 
 
-                var company = $localstorage.get('company');;
+                var company = $localstorage.get('company');
 
                 var deferred = $q.defer();
                 var d =  new  Date().getTime();
@@ -281,15 +281,14 @@
 
             getCategory: function() {
 
-                //var company = $localstorage.getObject('company');
-                var company = 1;
-
+               // var company = $localstorage.get('company');;
+                var d =  new  Date().getTime();
                 var deferred = $q.defer();
 
                 $http({
                     method: 'GET',
-                    url: CONFIG.url + 'categorias.php',
-                    params: {company: company}
+                    url: DOCTRINE.url + 'categories/d=' + d,
+                   // params: {company: company}
                 })
                     .then(function(response) {
 
