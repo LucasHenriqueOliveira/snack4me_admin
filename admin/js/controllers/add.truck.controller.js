@@ -1,4 +1,4 @@
-/* jstz*/
+/* jstz  */
 (function () {
     'use strict';
 
@@ -18,9 +18,12 @@
         vm.partEdit = {};
         vm.complement = {};
 
+
         vm.back = function(){
             $location.path('/products');
         };
+
+        DataService.clearComplementos();
 
         vm.getComplementos = function() {
             vm.complementos = DataService.getComplementos();
@@ -83,6 +86,10 @@
         };
 
         vm.submitProduct = function(form) {
+
+
+
+
             var postData = {
                 "categoria": form.categoriaSelected.id,
                 "numero": form.product.numero,
@@ -99,7 +106,11 @@
                 "qtd_complemento" : form.complementos.length,
                 "company" : $localstorage.get('company'),
                 "zone" : jstz.determine().name(),
+                "imageFull" : form.product.imageFull.src,
+                "imageThumbnails" :  form.product.imageThumbnails.src,
             };
+
+            console.log(postData);
 
             var idx = 0;
 
@@ -122,6 +133,9 @@
             });
         };
 
+
+
+
         jQuery(document).ready(function(){
             jQuery('.popovers').popover();
 
@@ -132,6 +146,11 @@
             });
         });
     }
+
+
+
+
+
 
 })();
 

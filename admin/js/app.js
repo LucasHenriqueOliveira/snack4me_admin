@@ -1,10 +1,15 @@
 (function () {
     'use strict';
 
+
+
+
     angular
-        .module('app', ['ngRoute', 'ui.utils.masks', 'ui.mask', 'ngAnimate', 'highcharts-ng', 'jkuri.slimscroll'])
+        .module('app', ['ngRoute', 'ui.utils.masks', 'ui.mask', 'ngAnimate', 'highcharts-ng', 'jkuri.slimscroll','ngImageInputWithPreview'])
         .config(config)
         .run(run);
+
+
 
     config.$inject = ['$routeProvider', '$httpProvider'];
     function config($routeProvider, $httpProvider) {
@@ -402,5 +407,6 @@
             }
         });
     }
+
 
 })();

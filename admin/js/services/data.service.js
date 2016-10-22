@@ -302,6 +302,11 @@
                 return deferred.promise;
             },
 
+            clearComplementos: function() {
+                $localstorage.remove('complementos');
+                return false;
+            },
+
             getComplementos: function() {
 
                 var arrComplementos = [];
@@ -326,7 +331,7 @@
 
                 $http({
                     method: 'POST',
-                    url: CONFIG.url + 'add-produto.php',
+                    url: DOCTRINE.url + 'products/incluir',
                     data: data
                 })
                     .then(function(response) {
