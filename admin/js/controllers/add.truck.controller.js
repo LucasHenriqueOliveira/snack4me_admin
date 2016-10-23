@@ -110,7 +110,7 @@
                 "imageThumbnails" :  form.product.imageThumbnails.src,
             };
 
-            console.log(postData);
+
 
             var idx = 0;
 

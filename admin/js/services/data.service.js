@@ -331,7 +331,7 @@
 
                 $http({
                     method: 'POST',
-                    url: DOCTRINE.url + 'products/incluir',
+                    url: CONFIG.url + 'add-produto.php',
                     data: data
                 })
                     .then(function(response) {
