@@ -85,7 +85,7 @@
                 return deferred.promise;
             },
 
-            getDataDashboard: function() {
+            getDataDashboard: function(zone) {
 
                 //var company = $localstorage.getObject('company');
                 var company = $localstorage.get('company');
@@ -94,9 +94,10 @@
 
                 $http({
                     method: 'POST',
-                    url: CONFIG.url + 'dashboard.php',
+                    url: DOCTRINE.url + 'dashboard',
                     data: {
-                        company: company
+                        company: company,
+                        zone:zone
                     }
                 })
                     .then(function(response) {

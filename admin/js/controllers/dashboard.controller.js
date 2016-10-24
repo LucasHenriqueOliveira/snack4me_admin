@@ -1,3 +1,4 @@
+/* jstz*/
 (function () {
     'use strict';
 
@@ -9,8 +10,8 @@
 
     function DashboardController(DataService) {
         var vm = this;
-
-        DataService.getDataDashboard().then(function (data) {
+        var zone =  jstz.determine().name();
+        DataService.getDataDashboard(zone).then(function (data) {
             vm.dash = data.response;
         });
     }
