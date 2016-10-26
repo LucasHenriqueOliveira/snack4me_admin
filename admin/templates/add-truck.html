@@ -128,13 +128,13 @@
                                 <div class="col-lg-2 col-sm-6">
                                     <input type="file" name="myImage" image-with-preview
                                            ng-model="vm.product.imageFull"
-                                           accept="image/jpeg,image/png"
+                                           accept="image/jpeg"
                                            dimensions="height < 400">
 
                                     <div class="alert alert-danger" ng-show="formProduct.myImage.$error.image" role="alert">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         <span class="sr-only">Error:</span>
-                                        Insira apenas formatos JPEG ou PNG!
+                                        Insira apenas formato JPEG!
                                     </div>
 
                                     <div class="alert alert-danger" ng-show="formProduct.myImage.$error.dimensions" role="alert">
@@ -152,13 +152,13 @@
                                 <div class="col-lg-2 col-sm-6">
                                     <input type="file" name="myImageThumbnails" image-with-preview
                                            ng-model="vm.product.imageThumbnails"
-                                           accept="image/jpeg,image/png"
+                                           accept="image/jpeg"
                                            dimensions="height < 151 && width < 151">
 
                                     <div class="alert alert-danger" ng-show="formProduct.myImageThumbnails.$error.image" role="alert">
                                         <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
                                         <span class="sr-only">Error:</span>
-                                        Insira apenas formatos JPEG ou PNG!
+                                        Insira apenas formato JPEG!
                                     </div>
 
                                     <div class="alert alert-danger" ng-show="formProduct.myImageThumbnails.$error.dimensions" role="alert">
