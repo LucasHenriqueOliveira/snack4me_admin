@@ -1290,7 +1290,8 @@ if (objectTypes[typeof module]) {
 						return value;
 					}
 
-					return moneyMask.apply(value.toFixed(decimals).replace(/[^\d]+/g,''));
+					//return moneyMask.apply(value.toFixed(decimals).replace(/[^\d]+/g,''));
+                    return moneyMask.apply(parseFloat(value).toFixed(decimals).replace(/[^\d]+/g,''));
 				});
 
 				function parse(value) {

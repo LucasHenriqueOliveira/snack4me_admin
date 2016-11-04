@@ -50,19 +50,10 @@
 
         };
 
-        vm.activeProduct = function(truck) {
-            var truckActive = {
-                id: $localstorage.getObject('id')
-            };
-            TruckService.activeTruck(truck.carro_id, truckActive).then(function (data) {
-                if(data.error) {
-                    toastr.error(data.message, 'Produto', {timeOut: 3000});
-                } else {
-                    toastr.success(data.message, 'Produto', {timeOut: 3000});
-                }
-                vm.getTrucks();
-            });
-        };
+
+
+
+
 
     }
 

@@ -5,218 +5,113 @@
         .module('app')
         .controller('EditTruckController', EditTruckController);
 
-    EditTruckController.$inject = ['$location', 'TruckService', '$routeParams', '$filter', '$localstorage', 'PartService', '$scope', '$rootScope'];
+    EditTruckController.$inject = ['DataService', '$localstorage', '$location', '$scope', '$filter', '$rootScope', 'TruckService'];
 
-    function EditTruckController($location, TruckService, $routeParams, $filter, $localstorage, PartService, $scope, $rootScope) {
+    function EditTruckController(DataService, $localstorage, $location, $scope, $filter, $rootScope, TruckService) {
         var vm = this;
-        vm.loading = true;
-        vm.truck = {};
-        vm.partEdit = {};
         vm.part = {};
-        vm.parts = {};
-        vm.message_part = '';
-        vm.message_part_edit = '';
+        vm.complement = {};
 
         vm.back = function(){
-            $location.path('/trucks');
+            $location.path('/products');
         };
 
-        vm.truck = TruckService.getCurrentTruck();
+         vm.product = DataService.getCurrentProduct();
 
-        if(!vm.truck) {
-            TruckService.getById($routeParams.id).then(function (data) {
-                vm.truck = data.getTruck;
-                vm.parts_truck = data.getTruckPart;
-                vm.loading = false;
-            });
-        } else {
-            TruckService.getTruckPart(vm.truck.carro_id).then(function (data) {
-                vm.parts_truck = data.getTruckPart;
-                vm.loading = false;
-            });
+        if(!vm.product) {
+            toastr.warning("Necessário selecionar o produto da lista", {timeOut: 3000});
+            $location.path('/products');
         }
 
-        vm.getAllParts = function() {
-            PartService.getAllParts().then(function (data) {
-                vm.parts = data.getParts;
-            });
+        vm.product.numero = vm.product.product_number;
+        vm.product.name_pt = vm.product.product_name_pt;
+        vm.product.name_en = vm.product.product_name_en;
+        vm.product.name_es = vm.product.product_name_es;
+        vm.product.desc_pt = vm.product.product_desc_pt;
+        vm.product.desc_en = vm.product.product_desc_en;
+        vm.product.desc_es = vm.product.product_desc_es;
+        vm.product.price = vm.product.product_price;
+        vm.product.hour_initial = vm.product.product_hour_initial;
+        vm.product.hour_final = vm.product.product_hour_final;
+        vm.product.fast = vm.product.product_fast;
+        vm.categorySelectId = vm.product.product_category_id;
+        vm.product.inventory_qtd = vm.product.product_inventory_qtd;
+        vm.product.inventory_current = vm.product.product_inventory_current;
+        vm.product.inventory_minimum = vm.product.product_inventory_minimum;
+        vm.product.inventory_maximum = vm.product.product_inventory_maximum;
+        vm.admin = false;
+
+        if($localstorage.get('roles_id') == 3){
+            vm.admin = true;
+        }
+
+        vm.getComplementos = function() {
+            vm.complementos = DataService.getComplementos();
         };
 
-        vm.getAllParts();
+        vm.getComplementos();
 
-        vm.addPart = function() {
-            vm.part.partSelect = {};
-            vm.part.options = {};
-            vm.part.lastChange = '';
-            vm.part.timeChange = '';
+        DataService.getCategory().then(function(data){
 
-            jQuery(document).ready(function(){
-                jQuery("#myModal").modal("show");
-            });
+            vm.categorias = data.response;
+        });
+
+
+
+        vm.dadosSelect = {
+
+            categoriaSelected: { categoriaId: { id: vm.categorySelectId}}
         };
 
-        vm.checkPart = function() {
 
-            if(vm.part.partSelect.parts.length) {
-                vm.part.options = vm.part.partSelect.parts;
-            } else {
-                vm.part.options = {};
-            }
-        };
 
-        vm.submitPart = function(form) {
+        vm.removeComplemento = function(complemento) {
+            var complementos = $localstorage.getObject('complementos');
 
-            if(form.truck.carro_km < form.part.lastChange) {
-                vm.message_part = 'Km da última troca da peça/item deve ser menor ou igual a km atual do caminhão.';
-                return false;
-            }
-
-            if(vm.part.partSelect.parts.length && !form.part.part_option_select){
-                vm.message_part = 'Selecione uma peça/item do estoque.';
-                return false;
-            }
-
-            if(!vm.part.partSelect.parts.length) {
-                form.part.part_option_select = {
-                    estoque_id: null,
-                    estoque_descricao: null
-                };
-            }
-
-            vm.parts_truck.push({
-                carro_item_id: null,
-                item_nome : form.part.partSelect.name,
-                carro_item_item_id : form.part.partSelect.id,
-                carro_item_vida_util : form.part.timeChange,
-                carro_item_ultima_km: form.part.lastChange,
-                estoque_id: form.part.part_option_select.estoque_id,
-                estoque_descricao: form.part.part_option_select.estoque_descricao
-            });
-
-            vm.part = {};
-            vm.message_part = '';
-            $scope.formPart.$setPristine();
-
-            jQuery(document).ready(function(){
-                jQuery("#myModal").modal("hide");
-
-                var bodyHeight = jQuery(this).height();
-                jQuery("html, body").animate({ scrollTop: 0 }, "slow");
-                jQuery(".content .clearfix").parent().animate({ height: (bodyHeight/2) }, "slow");
-            });
-        };
-
-        vm.editPart = function(part, index) {
-            vm.partEdit.partSelect = {
-                id: part.carro_item_item_id,
-                name: part.item_nome
-            };
-            vm.partEdit.carroItemId = part.carro_item_id;
-            vm.partEdit.timeChange = part.carro_item_vida_util;
-            vm.partEdit.lastChange = part.carro_item_ultima_km;
-            vm.partEdit.index = index;
-
-            if(!part.estoque_id) {
-                vm.partEdit.options = {
-                    length: 0
-                };
-            } else {
-                for(var i = 0; i < vm.parts.length; i++) {
-                    if(vm.parts[i].id === part.carro_item_item_id){
-                        vm.part.options = vm.parts[i].parts;
-                    }
-                }
-
-                vm.partEdit.part_option_select = {
-                    estoque_id: part.estoque_id,
-                    estoque_descricao: part.estoque_descricao
-                };
-            }
-
-            jQuery(document).ready(function(){
-                jQuery("#myModalEdit").modal("show");
-            });
-        };
-
-        vm.submitEditPart = function(form) {
-
-            if(form.truck.carro_km < form.partEdit.lastChange) {
-                vm.message_part_edit = 'Km da última troca da peça/item deve ser menor ou igual a km atual do caminhão.';
-                return false;
-            }
-
-            if(!form.partEdit.part_option_select) {
-                form.partEdit.part_option_select = {
-                    estoque_id: null,
-                    estoque_descricao: null
-                };
-            }
-
-            var parts = vm.parts_truck;
-
-            if (form.partEdit.index !== -1) {
-                parts[form.partEdit.index]['carro_item_id'] = form.partEdit.carroItemId;
-                parts[form.partEdit.index]['carro_item_item_id'] = form.partEdit.partSelect.id;
-                parts[form.partEdit.index]['item_nome'] = form.partEdit.partSelect.name;
-                parts[form.partEdit.index]['carro_item_vida_util'] = form.partEdit.timeChange;
-                parts[form.partEdit.index]['carro_item_ultima_km'] = form.partEdit.lastChange;
-                parts[form.partEdit.index]['estoque_id'] = form.partEdit.part_option_select.estoque_id;
-                parts[form.partEdit.index]['estoque_descricao'] = form.partEdit.part_option_select.estoque_descricao;
-
-                vm.parts_truck = parts;
-                jQuery(document).ready(function(){
-                    jQuery("#myModalEdit").modal("hide");
-                });
-            } else {
-                toastr.error('Erro ao alterar a peça/item', 'Alteração de peça/item', {timeOut: 3000});
-            }
-        };
-
-        vm.removePart = function(part) {
-
-            var isConfirm = confirm('Confirma a exclusão?');
-
-            if(isConfirm != true){
-                return false;
-            }
-
-            var parts = vm.parts_truck;
-
-            var found = $filter('filter')(parts, part, true);
+            var found = $filter('filter')(complementos, complemento, true);
 
             if (found.length) {
-
-                if(part.carro_item_id){
-                    var data = {
-                        id: $localstorage.getObject('id')
-                    };
-                    TruckService.removeTruckPart(part.carro_item_id, data).then(function (data) {
-                        if(data.error) {
-                            toastr.error('Erro ao excluir a peça/item', 'Exclusão de peça/item', {timeOut: 3000});
-                            return false;
-                        } else {
-                            toastr.success(data.message, 'Exclusão de peça/item', {timeOut: 3000});
-                        }
-                    });
-                }
-
-                for(var i = 0; i < parts.length; i++) {
-                    var obj = parts[i];
+                for(var i = 0; i < complementos.length; i++) {
+                    var obj = complementos[i];
 
                     if(found.indexOf(obj) !== -1) {
-                        parts.splice(i, 1);
+                        complementos.splice(i, 1);
                         i--;
                     }
                 }
-
-                vm.parts_truck = parts;
-
+                $localstorage.setObject('complementos', complementos);
+                vm.getComplementos();
             } else {
-                toastr.error('Erro ao excluir a peça/item', 'Exclusão de peça/item', {timeOut: 3000});
+                toastr.error('Erro ao excluir o complemento', 'Exclusão de complemento', {timeOut: 3000});
             }
         };
+        vm.submitComplement = function(complement) {
+            vm.complementos = $localstorage.getObject('complementos');
 
-        vm.submitEditTruck = function(form) {
+            if(JSON.stringify(vm.complementos) === '{}'){
+                $localstorage.setObject('complementos', [{
+                    name_pt : complement.name_pt,
+                    name_en : complement.name_en,
+                    name_es : complement.name_es
+                }]);
+            } else{
+                vm.complementos.push({
+                    name_pt : complement.name_pt,
+                    name_en : complement.name_en,
+                    name_es : complement.name_es
+                });
+                $localstorage.setObject('complementos', vm.complementos);
+            }
+
+            vm.complementos = DataService.getComplementos();
+            vm.complement = {};
+            $scope.formComplement.$setPristine();
+
+            jQuery(document).ready(function(){
+                jQuery("#myComplement").modal("hide");
+            });
+        };
+        vm.submitEditProduct = function(form) {
 
             var postData = {
                 id: form.truck.carro_id,
@@ -264,6 +159,6 @@
                 language: 'pt-BR'
             });
         });
-    }
+    };
 
 })();
