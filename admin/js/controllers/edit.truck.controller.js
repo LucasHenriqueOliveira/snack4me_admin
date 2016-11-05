@@ -186,7 +186,8 @@
                 "fast": form.product.fast,
                 "qtd_complemento": form.complementos.length,
                 "zone": jstz.determine().name(),
-                "roles_id": $localstorage.get('roles_id')
+                "roles_id": $localstorage.get('roles_id'),
+                "company" : $localstorage.get('company'),
             };
 
             if($localstorage.get('roles_id') == 3) {
@@ -206,8 +207,7 @@
                 idx++;
             });
 
-            console.log( postData);
-            return false;
+
 
             DataService.updateProduct(postData).then(function (data) {
                 if(data.error) {
