@@ -170,30 +170,30 @@
         vm.submitEditProduct = function(form) {
 
 
-               var postData = {
-                    "id": vm.product.product_id,
-                    "categoria": form.categoriaSelected.id,
-                    "numero": form.product.numero,
-                    "hora_fim": form.product.hour_final,
-                    "hora_inicio": form.product.hour_initial,
-                    "price": form.product.price,
-                    "nome_en": form.product.name_en,
-                    "nome_es": form.product.name_es,
-                    "nome_pt": form.product.name_pt,
-                    "desc_en": form.product.desc_en,
-                    "desc_es": form.product.desc_es,
-                    "desc_pt": form.product.desc_pt,
-                    "fast": form.product.fast,
-                    "qtd_complemento": form.complementos.length,
-                    "zone": jstz.determine().name(),
-                    "roles_id": $localstorage.get('roles_id')
-                    };
+            var postData = {
+                "id": vm.product.product_id,
+                "categoria": vm.dadosSelect.categoriaSelected.categoriaId.id,
+                "numero": form.product.numero,
+                "hora_fim": form.product.hour_final,
+                "hora_inicio": form.product.hour_initial,
+                "price": form.product.price,
+                "nome_en": form.product.name_en,
+                "nome_es": form.product.name_es,
+                "nome_pt": form.product.name_pt,
+                "desc_en": form.product.desc_en,
+                "desc_es": form.product.desc_es,
+                "desc_pt": form.product.desc_pt,
+                "fast": form.product.fast,
+                "qtd_complemento": form.complementos.length,
+                "zone": jstz.determine().name(),
+                "roles_id": $localstorage.get('roles_id')
+            };
 
             if($localstorage.get('roles_id') == 3) {
                 postData["inventory_qtd"]  =  form.product.inventory_qtd;
                 postData["inventory_current"] = form.product.inventory_current;
                 postData["inventory_minimum"] = form.product.inventory_minimum;
-                postData["inventory_maximum"] =  form.product.inventory_maximu;
+                postData["inventory_maximum"] =  form.product.inventory_maximum;
             }
 
 
@@ -206,7 +206,8 @@
                 idx++;
             });
 
-
+            console.log( postData);
+            return false;
 
             DataService.updateProduct(postData).then(function (data) {
                 if(data.error) {
