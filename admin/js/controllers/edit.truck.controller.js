@@ -1,3 +1,4 @@
+/* jstz  */
 (function () {
     'use strict';
 
@@ -5,18 +6,19 @@
         .module('app')
         .controller('EditTruckController', EditTruckController);
 
-    EditTruckController.$inject = ['DataService', '$localstorage', '$location', '$scope', '$filter', '$rootScope', 'TruckService'];
+    EditTruckController.$inject = ['DataService', '$localstorage', '$location', '$scope', '$filter', '$rootScope'];
 
-    function EditTruckController(DataService, $localstorage, $location, $scope, $filter, $rootScope, TruckService) {
+    function EditTruckController(DataService, $localstorage, $location, $scope, $filter, $rootScope) {
         var vm = this;
         vm.part = {};
         vm.complement = {};
+        DataService.clearComplementos();
 
         vm.back = function(){
             $location.path('/products');
         };
 
-         vm.product = DataService.getCurrentProduct();
+        vm.product = DataService.getCurrentProduct();
 
         if(!vm.product) {
             toastr.warning("Necessário selecionar o produto da lista", {timeOut: 3000});
@@ -40,6 +42,7 @@
         vm.product.inventory_minimum = vm.product.product_inventory_minimum;
         vm.product.inventory_maximum = vm.product.product_inventory_maximum;
         vm.admin = false;
+        vm.product.complemento = vm.product.type_product;
 
         if($localstorage.get('roles_id') == 3){
             vm.admin = true;
@@ -49,13 +52,65 @@
             vm.complementos = DataService.getComplementos();
         };
 
-        vm.getComplementos();
 
         DataService.getCategory().then(function(data){
 
             vm.categorias = data.response;
         });
 
+        vm.loadComplementos = function () {
+            if(vm.product.complemento){
+                for(var i=0; i<vm.product.complemento.length; i++){
+                    vm.complementos = $localstorage.getObject('complementos');
+                    if(JSON.stringify(vm.complementos) === '{}'){
+                        $localstorage.setObject('complementos', [{
+                            name_pt: vm.product.complemento[i].type_product_name_pt,
+                            name_en: vm.product.complemento[i].type_product_name_en,
+                            name_es: vm.product.complemento[i].type_product_name_es
+                        }]);
+                    } else {
+                        vm.complementos.push({
+                            name_pt: vm.product.complemento[i].type_product_name_pt,
+                            name_en: vm.product.complemento[i].type_product_name_en,
+                            name_es: vm.product.complemento[i].type_product_name_es
+                        });
+                        $localstorage.setObject('complementos', vm.complementos);
+                    }
+
+                }
+                vm.complementos = DataService.getComplementos();
+            }
+        };
+
+
+        vm.loadComplementos();
+
+        vm.submitComplement = function(complement) {
+            vm.complementos = $localstorage.getObject('complementos');
+
+            if(JSON.stringify(vm.complementos) === '{}'){
+                $localstorage.setObject('complementos', [{
+                    name_pt : complement.name_pt,
+                    name_en : complement.name_en,
+                    name_es : complement.name_es
+                }]);
+            } else{
+                vm.complementos.push({
+                    name_pt : complement.name_pt,
+                    name_en : complement.name_en,
+                    name_es : complement.name_es
+                });
+                $localstorage.setObject('complementos', vm.complementos);
+            }
+
+            vm.complementos = DataService.getComplementos();
+            vm.complement = {};
+            $scope.formComplement.$setPristine();
+
+            jQuery(document).ready(function(){
+                jQuery("#myComplement").modal("hide");
+            });
+        };
 
 
         vm.dadosSelect = {
@@ -111,41 +166,57 @@
                 jQuery("#myComplement").modal("hide");
             });
         };
+
         vm.submitEditProduct = function(form) {
 
-            var postData = {
-                id: form.truck.carro_id,
-                frota: form.truck.carro_frota,
-                nome: form.truck.carro_nome,
-                placa: form.truck.carro_placa,
-                placa_semi_reboque: form.truck.carro_placa_semi_reboque,
-                km: form.truck.carro_km,
-                qtd_part: form.parts_truck.length,
-                usuario_ativacao: $localstorage.getObject('id'),
-                empresa: $localstorage.getObject('company')
-            };
+
+               var postData = {
+                    "id": vm.product.product_id,
+                    "categoria": form.categoriaSelected.id,
+                    "numero": form.product.numero,
+                    "hora_fim": form.product.hour_final,
+                    "hora_inicio": form.product.hour_initial,
+                    "price": form.product.price,
+                    "nome_en": form.product.name_en,
+                    "nome_es": form.product.name_es,
+                    "nome_pt": form.product.name_pt,
+                    "desc_en": form.product.desc_en,
+                    "desc_es": form.product.desc_es,
+                    "desc_pt": form.product.desc_pt,
+                    "fast": form.product.fast,
+                    "qtd_complemento": form.complementos.length,
+                    "zone": jstz.determine().name(),
+                    "roles_id": $localstorage.get('roles_id')
+                    };
+
+            if($localstorage.get('roles_id') == 3) {
+                postData["inventory_qtd"]  =  form.product.inventory_qtd;
+                postData["inventory_current"] = form.product.inventory_current;
+                postData["inventory_minimum"] = form.product.inventory_minimum;
+                postData["inventory_maximum"] =  form.product.inventory_maximu;
+            }
+
 
             var idx = 0;
 
-            Object.keys(form.parts_truck).forEach(function(partId) {
-                postData['id_car_item_' + idx] = form.parts_truck[partId].carro_item_id;
-                postData['id_part_' + idx] = form.parts_truck[partId].carro_item_item_id;
-                postData['time_part_' + idx] = form.parts_truck[partId].carro_item_vida_util;
-                postData['last_part_' + idx] = form.parts_truck[partId].carro_item_ultima_km;
-                postData['stock_' + idx] = form.parts_truck[partId].estoque_id;
+            Object.keys(form.complementos).forEach(function(partId) {
+                postData['complemento_pt_' + idx] = form.complementos[partId].name_pt;
+                postData['complemento_en_' + idx] = form.complementos[partId].name_en;
+                postData['complemento_es_' + idx] = form.complementos[partId].name_es;
                 idx++;
             });
 
-            TruckService.update(postData).then(function (data) {
+
+
+            DataService.updateProduct(postData).then(function (data) {
                 if(data.error) {
-                    toastr.error(data.message, 'Caminhão', {timeOut: 3000});
+                    toastr.error(data.message, 'Produto', {timeOut: 3000});
                 } else {
-                    toastr.success(data.message, 'Caminhão', {timeOut: 3000});
-                    $localstorage.remove('truck_parts');
-                    vm.truck = {};
-                    $scope.formTruck.$setPristine();
-                    $rootScope.$broadcast("login-done");
-                    $location.path('/trucks');
+                    toastr.success(data.message, 'Produto', {timeOut: 3000});
+                    vm.complement = {};
+                    DataService.clearComplementos();
+                    $scope.formProduct.$setPristine();
+                    $location.path('/products');
                 }
             });
         };
