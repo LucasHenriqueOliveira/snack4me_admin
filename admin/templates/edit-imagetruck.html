@@ -1,0 +1,121 @@
+<!--main content start-->
+<div id="main-content">
+    <div class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-md-12">
+                <!--breadcrumbs start -->
+                <ul class="breadcrumb">
+                    <li><a href="#/"><i class="fa fa-bar-chart"></i> Dashboard</a></li>
+                    <li><a href="#/products">Produtos</a></li>
+                    <li class="active">Editar Imagem do Produto</li>
+                </ul>
+                <!--breadcrumbs end -->
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12">
+                <section class="panel">
+                    <header class="panel-heading">
+                        Editar Imagem do Produto
+                        <span class="tools pull-right">
+                                <a href="javascript:;" class="fa fa-chevron-down"></a>
+                                <a href="javascript:;" class="fa fa-times"></a>
+                            </span>
+                    </header>
+                    <div class="panel-body">
+                        <div class="space15"></div>
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="prf-contacts">
+                                    <div class="location-info">
+                                        <div>
+                                            <strong>Thumb Atual:</strong>
+                                            <img ng-src="{{vm.produto.thumb}}" width="150px" height="150px"> <br><br>
+                                            <strong>Full Atual:</strong>
+                                            <img ng-src="{{vm.produto.full}}" width="150px" height="150px"> <br><br>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+
+
+
+
+                        <form name="formProduct" role="form" class="form-horizontal">
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Imagem Full</label>
+                                <div class="col-lg-2 col-sm-6">
+                                    <input type="file" name="myImage" image-with-preview
+                                           ng-model="vm.produto.imageFull"
+                                           accept="image/jpeg"
+                                           dimensions="height < 400">
+
+                                    <div class="alert alert-danger" ng-show="formProduct.myImage.$error.image" role="alert">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        Insira apenas formato JPEG!
+                                    </div>
+
+                                    <div class="alert alert-danger" ng-show="formProduct.myImage.$error.dimensions" role="alert">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        Imagem deve possuir a dimensão altura menor que 400px
+                                    </div>
+                                    <img ng-show="vm.produto.imageFull.src" ng-src="{{vm.produto.imageFull.src}}"/>
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-lg-3 col-sm-3 control-label">Imagem Thumbnails</label>
+                                <div class="col-lg-2 col-sm-6">
+                                    <input type="file" name="myImageThumbnails" image-with-preview
+                                           ng-model="vm.produto.imageThumbnails"
+                                           accept="image/jpeg"
+                                           dimensions="height < 151 && width < 151">
+
+                                    <div class="alert alert-danger" ng-show="formProduct.myImageThumbnails.$error.image" role="alert">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        Insira apenas formato JPEG!
+                                    </div>
+
+                                    <div class="alert alert-danger" ng-show="formProduct.myImageThumbnails.$error.dimensions" role="alert">
+                                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                                        <span class="sr-only">Error:</span>
+                                        Imagem deve possuir a dimensão 150x150
+                                    </div>
+                                    <img ng-show="vm.produto.imageThumbnails.src" ng-src="{{vm.produto.imageThumbnails.src}}"/>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="col-lg-11 text-center">
+                                    <button type="button" class="btn btn-default " ng-click="vm.back()"><i
+                                            class="fa fa-undo"></i> Voltar
+                                    </button>
+                                    <button class="btn btn-primary" type="submit" ng-disabled="formProduct.$invalid"
+                                            ng-click="vm.submitEditImageProduct(vm)"><i class="fa fa-check"></i> Salvar
+                                    </button>
+                                </div>
+                            </div>
+                            <span id="toastrOptions"></span>
+
+
+                        </form>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+    <!-- page end-->
+</div>
+

@@ -352,8 +352,28 @@
                 var deferred = $q.defer();
 
                 $http({
-                    method: 'POST',
+                    method: 'PUT',
                     url: DOCTRINE.url + 'products/update',
+                    data: data
+                })
+                    .then(function(response) {
+
+                        deferred.resolve(response.data);
+
+
+                    }, function(error) {
+                        console.log(error);
+                    });
+
+                return deferred.promise;
+            },
+            updateImageProduct: function(data) {
+
+                var deferred = $q.defer();
+
+                $http({
+                    method: 'PUT',
+                    url: DOCTRINE.url + 'products/updateimage',
                     data: data
                 })
                     .then(function(response) {

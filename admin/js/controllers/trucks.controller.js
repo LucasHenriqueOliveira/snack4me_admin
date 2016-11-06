@@ -28,6 +28,11 @@
             $location.path('/edit-product/' + product.product_id);
         };
 
+        vm.editImageProduct = function(product) {
+            DataService.setCurrentProduct(product);
+            $location.path('/edit-image-product/' + product.product_id);
+        };
+
         vm.removeProduct = function(product) {
 
             var postData = {

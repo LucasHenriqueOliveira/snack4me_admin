@@ -154,6 +154,15 @@
                 }
             })
 
+            .when('/edit-image-product/:id', {
+                controller: 'EditImageTruckController',
+                templateUrl: 'templates/edit-imagetruck.html',
+                controllerAs: 'vm',
+                access: {
+                    requiredLogin: true
+                }
+            })
+
             .when('/stock', {
                 controller: 'StockController',
                 templateUrl: 'templates/stock.html',

@@ -17,6 +17,7 @@
 
         vm.produto = DataService.getCurrentProduct();
         vm.produto.thumb = "http://snack4me.com/hotel/events/" + vm.produto.product_event_id + "/products/thumb/" + vm.produto.product_image;
+        vm.produto.full = "http://snack4me.com/hotel/events/" + vm.produto.product_event_id + "/products/full/" + vm.produto.product_image;
 
         vm.editProduct = function(product) {
             DataService.setCurrentProduct(product);
