@@ -11,18 +11,21 @@
                             <thead>
                             <tr>
                                 <th>Pedido #</th>
-                                <th>Apartamento</th>
-                                <th>Local de entrega</th>
+                                <th>Identificação</th>
                                 <th>Produtos</th>
                                 <th>Agendado</th>
+                                <th>Entrega</th>
                                 <th class="center">Ações</th>
                             </tr>
                             </thead>
                             <tbody>
                             <tr ng-repeat="order in vm.results" ng-class="{'alert-warning': order.fast == 1}">
                                 <td><a href data-target="#myModalId" data-toggle="modal" ng-click="vm.getStatus(order.order_id)">{{order.numero_pedido}}</a></td>
-                                <td>{{order.apartamento}}</td>
-                                <td><span ng-show="!order.local"> {{order.apartamento}} </span>{{order.local}}</td>
+                                <td>
+                                    {{order.name}}<br />
+                                    Apt: {{order.apartamento}}<br />
+                                    Hora: {{order.time_order}}
+                                </td>
                                 <td>
                                     <div ng-repeat="produto in order.produtos">
                                         <a href data-target="#myModal" data-toggle="modal" ng-click="vm.getImage(produto.image, produto.name)">
@@ -40,6 +43,7 @@
                                     <span ng-show="order.schedule == 0"> - </span>
                                     <span ng-show="order.schedule == 1">{{order.time}}</span>
                                 </td>
+                                <td><span ng-show="!order.local"> {{order.apartamento}} </span>{{order.local}}</td>
                                 <td class="center">
                                     <button class="btn btn-info" ng-click="vm.outDelivery(order.order_id)"><i class="fa fa-truck"></i>&nbsp; Entregar</button>
                                 </td>
