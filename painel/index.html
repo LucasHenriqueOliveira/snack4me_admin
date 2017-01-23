@@ -29,7 +29,7 @@
 
 <body ng-controller="AppController">
 
-<div ng-if="logged">
+<div ng-if="!logged">
     <!-- Fixed navbar -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -55,7 +55,10 @@
                 </div>
                 <ul class="nav navbar-nav navbar-right">
                     <li><img src="images/logo.svg" width="100px" /> </li>
+
+                    <li> <a href="" ng-click="logout()"><i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a></li>
                 </ul>
+
             </div><!--/.nav-collapse -->
         </div>
     </nav>
@@ -63,7 +66,7 @@
     <div ng-view></div>
 </div>
 
-<div ng-if="!logged">
+<div  ng-if="!logged">
     <p>Você não tem acesso ao painel.</p>
 </div>
 
