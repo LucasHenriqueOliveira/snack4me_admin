@@ -169,6 +169,7 @@
 
         vm.submitEditProduct = function(form) {
 
+            var qtdComplemento = form.complementos ? form.complementos.length: null;
 
             var postData = {
                 "id": vm.product.product_id,
@@ -184,7 +185,7 @@
                 "desc_es": form.product.desc_es,
                 "desc_pt": form.product.desc_pt,
                 "fast": form.product.fast,
-                "qtd_complemento": form.complementos ? form.complementos.length: null,
+                "qtd_complemento": qtdComplemento,
                 "zone": jstz.determine().name(),
                 "roles_id": $localstorage.get('roles_id'),
                 "company" : $localstorage.get('company'),
@@ -197,15 +198,18 @@
                 postData["inventory_maximum"] =  form.product.inventory_maximum;
             }
 
+            if(qtdComplemento){
+                var idx = 0;
 
-            var idx = 0;
+                Object.keys(form.complementos).forEach(function(partId) {
+                    postData['complemento_pt_' + idx] = form.complementos[partId].name_pt;
+                    postData['complemento_en_' + idx] = form.complementos[partId].name_en;
+                    postData['complemento_es_' + idx] = form.complementos[partId].name_es;
+                    idx++;
+                });
+            }
 
-            Object.keys(form.complementos).forEach(function(partId) {
-                postData['complemento_pt_' + idx] = form.complementos[partId].name_pt;
-                postData['complemento_en_' + idx] = form.complementos[partId].name_en;
-                postData['complemento_es_' + idx] = form.complementos[partId].name_es;
-                idx++;
-            });
+
 
 
 
