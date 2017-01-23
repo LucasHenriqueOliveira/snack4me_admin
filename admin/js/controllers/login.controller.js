@@ -23,7 +23,12 @@
 
                 if(!response.data.error) {
                     AuthenticationService.SetCredentials(response.data.response);
-                    $location.path('/');
+
+                    if(response.data.response.profile_id == 5){
+                        window.location.href = 'http://www.snack4me.com/hotel/painel/#/realizado/' + response.data.response.event;
+                    } else {
+                        $location.path('/');
+                    }
 
                 } else {
                     vm.message = response.data.message;
