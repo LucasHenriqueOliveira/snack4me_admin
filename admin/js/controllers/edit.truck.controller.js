@@ -184,7 +184,7 @@
                 "desc_es": form.product.desc_es,
                 "desc_pt": form.product.desc_pt,
                 "fast": form.product.fast,
-                "qtd_complemento": form.complementos.length,
+                "qtd_complemento": form.complementos ? form.complementos.length: null,
                 "zone": jstz.determine().name(),
                 "roles_id": $localstorage.get('roles_id'),
                 "company" : $localstorage.get('company'),
