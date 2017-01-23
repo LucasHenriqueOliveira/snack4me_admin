@@ -67,6 +67,14 @@
             win.print();
             win.close();
 
+            var win = window.open('', 'Print', 'width=500,height=300');
+            win.document.write('<html><head><title></title><style>body{ font-size: 15px } @page {margin: 0.5cm;}</style>' +
+                '</head><body># '+order.numero_pedido+'<br />Hora: '+order.time_order+'<br /> Apt: '+order.apartamento+'<br />Ent: '+order.local+'' +
+                '<br />'+products + agendado+'</body></html>');
+            win.document.close();
+            win.print();
+            win.close();
+
             DataService.getRefresh(order.order_id, 3).then(function(data) {
                 if(data.error === false) {
                     vm.done();
