@@ -46,7 +46,9 @@
                 products += order.produtos[i].name + ': ' + order.produtos[i].qtd + ' unid.(s)<br />';
 
                 for(var m = 0; m < order.produtos[i].type.length; m++) {
-                    products += '&nbsp;&nbsp; - ' + order.produtos[i].type[m].name + '<br />';
+                    if(order.produtos[i].type[m].name) {
+                        products += '&nbsp;&nbsp; - ' + order.produtos[i].type[m].name + '<br />';
+                    }
 
                     if(order.produtos[i].type[m].comment){
                         products += '&nbsp;&nbsp; obs.: ' + order.produtos[i].type[m].comment + '<br />';
@@ -62,14 +64,8 @@
             var win = window.open('', 'Print', 'width=500,height=300');
             win.document.write('<html><head><title></title><style>body{ font-size: 20px; line-height: 40px } @page {margin: 0.5cm;}</style>' +
                 '</head><body><div style="width: 100%;text-align: center"><img src="images/maxsavassi.png" width="100px"></div># '+order.numero_pedido+'<br />Hora: '+order.time_order+'<br /> Apt: '+order.apartamento+'<br />Ent: '+order.local+'' +
-                '<br />'+products + agendado+'<br/>------------------------<br/><div style="font-size: 14px;line-height: 20px">Snack4me<br/>www.snack4me.com<br/>(31)98553-0222</div></body></html>');
-            win.document.close();
-            win.print();
-            win.close();
-
-            var win = window.open('', 'Print', 'width=500,height=300');
-            win.document.write('<html><head><title></title><style>body{ font-size: 20px; line-height: 40px } @page {margin: 0.5cm;}</style>' +
-                '</head><body><div style="width: 100%;text-align: center"><img src="images/maxsavassi.png" width="100px"></div># '+order.numero_pedido+'<br />Hora: '+order.time_order+'<br /> Apt: '+order.apartamento+'<br />Ent: '+order.local+'' +
+                '<br />'+products + agendado+'<br/>------------------------<br/><div style="font-size: 14px;line-height: 20px">Snack4me<br/>www.snack4me.com<br/>(31)98553-0222</div>' +
+                '<br /><br /><br />---------------------------------<br /><br /><br /><div style="width: 100%;text-align: center"><img src="images/maxsavassi.png" width="100px"></div># '+order.numero_pedido+'<br />Hora: '+order.time_order+'<br /> Apt: '+order.apartamento+'<br />Ent: '+order.local+'' +
                 '<br />'+products + agendado+'<br/>------------------------<br/><div style="font-size: 14px;line-height: 20px">Snack4me<br/>www.snack4me.com<br/>(31)98553-0222</div></body></html>');
             win.document.close();
             win.print();
